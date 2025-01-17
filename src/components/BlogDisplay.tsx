@@ -1,35 +1,48 @@
 import { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import '../styles/Markdown.css'
-import '../styles/Code.css'
+import '../styles/Markdown.css';
+import '../styles/Code.css';
 
-interface Display {
+interface DisplayProps {
+    fileName: string;
+}
+
+interface DisplayState {
     markdown: string;
 }
 
-class Display extends Component<any, any> {
-  constructor(props : {}) {
+class BlogDisplay extends Component<DisplayProps, DisplayState> {
+  constructor(props: DisplayProps) {
     super(props);
     this.state = { markdown: '' };
   }
 
   componentDidMount() {
-    fetch('public/blogs/test.md').then((response) => response.text())
-        .then((text) => {
-            this.setState({ markdown: text })
-            console.log(text)
-        })
-        .catch((error) => {
-            console.error('There was a problem with the fetch operation:', error);
+    const { fileName } = this.props;
+    fetch(`/blogs/${fileName}.md`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-    );
-      
+        return response.text();
+      })
+      .then((text) => {
+        this.setState({ markdown: text });
+      })
+      .catch((error) => {
+        console.error('There was a problem with the fetch operation:', error);
+        this.setState({ markdown: 'Failed to load content.' });
+      });
   }
 
   render() {
-    const state = this.state
-    return <ReactMarkdown className="markdown-body">{state.markdown}</ReactMarkdown>;
+    const { markdown } = this.state;
+    return (
+      <ReactMarkdown className="markdown-body scrollPage is-top-overflowing">
+        {markdown}
+      </ReactMarkdown>
+    );
   }
 }
 
-export default Display;
+export default BlogDisplay;

@@ -1,42 +1,50 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-stretch: 100;
+  /* Note that font-stretch is a % of normal width */
+  font-style: normal;
+  /* See note below */
+  src: url(/public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf) format('ttf');
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --fontStack-monospace: 'Montserrat';
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  /* margin: 3%; */
+  overflow: hidden;
+
+  color: var(--fgColor-default);
+  background: linear-gradient(to top,
+      var(--bgColor-default),
+      var(--bgColor-muted));
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  font-family: var(--fontStack-monospace);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.scrollPage {
+  position: absolute;
+  x: 0;
+  y: 0;
+  max-width: 100vw;
+  max-height: calc(100vh - 250px);
+  /* margin:0 auto; */
+  overflow: scroll;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 40px, 12%, black 15%);
+  mask-image: linear-gradient(to bottom, transparent 25px, 40px, black 50px);
+  /*   --top-mask-size: 0px;
+  --bottom-mask-size: 0px; */
 }
 
-.card {
-  padding: 2em;
+.scrollPage .is-top-overflowing {
+  --top-mask-size: 10px !important;
 }
 
-.read-the-docs {
-  color: #888;
+.scrollPage .content.is-bottom-overflowing {
+  --bottom-mask-size: 48px !important;
 }

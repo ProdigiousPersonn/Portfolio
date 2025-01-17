@@ -1,15 +1,20 @@
-//Main page
+import { useState } from 'react';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { useState } from 'react'
-import Display from './components/BlogDisplay'
+//Pages
+import BlogDisplay from './components/BlogDisplay';
+import Home from './components/Home';
 
 function App() {
   return (
     <>
-      <h1>Blogs</h1>
-      <Display/>
+      <Navbar />
+      <div style={{paddingTop:'50px'}}></div>
+      {/* <BlogDisplay fileName='test'/> */}
+      <Home/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

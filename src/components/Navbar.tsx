@@ -1,14 +1,18 @@
 import React from "react";
-import { NavbarButton } from "./NavbarElements";
+// import { NavbarButton } from "./NavbarElements";
+import { Link } from "react-router-dom"
 import '../styles/Navbar.css'
 const Navbar = () => {
     return (
         <>
             <ul className="Navbar">
-                <h1>P</h1>
-                <NavbarButton name={"Home"}/>
-                <NavbarButton name={"About"}/>
+                <Link className="NavbarButton Logo" to={"/home"}>P</Link>
+                <Link to={"/about"} className="NavbarButton Links">About</Link>
+                <Link to={"/projects"} className="NavbarButton Links">Projects</Link>
+                <Link to={"/blog"} className="NavbarButton Links">Blog</Link>
+                {/* <NavbarButton name={"About"}/>
                 <NavbarButton name={"Projects"}/>
+                <NavbarButton name={"Blog"}/> */}
             </ul>
         </>
     );

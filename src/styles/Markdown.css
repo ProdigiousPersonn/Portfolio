@@ -20,6 +20,7 @@
     background-color: var(--bgColor-default);
     font-size: 16px;
     line-height: 1.5;
+    overflow-x: hidden;
     word-wrap: break-word;
 }
 

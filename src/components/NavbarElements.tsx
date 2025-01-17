@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface NavbarButtonProps {
     name: string;
@@ -6,7 +7,7 @@ interface NavbarButtonProps {
 
 const NavbarButton: React.FC<NavbarButtonProps> = ({ name }) => {
     return (
-        <button className="NavbarButton">{name}</button>
+        <Link to={`/${name}`} className="NavbarButton">{name}</Link>
     );
 };
 

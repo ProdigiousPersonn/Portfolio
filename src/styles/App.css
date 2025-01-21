@@ -7,7 +7,7 @@ body {
   -webkit-text-size-adjust: 100%;
   /* margin: 3%; */
   overflow: hidden;
-
+  background-color: var(--bgColor-default);
   color: var(--fgColor-default);
   /* background: linear-gradient(to top,
       var(--bgColor-default),

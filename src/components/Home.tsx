@@ -9,7 +9,8 @@ class Home extends Component<any, any> {
         return (
             <>
                 <h1 className="title">Prodigious.</h1>
-                <h2 className="subTitle">Aiden Tran</h2>
+                <h1 className="bgLogo">P</h1>
+                <h2 className="subTitle">Programmer</h2>
                 <div className="model">
                     <Canvas shadows camera={{ position: [0, 1, 3], fov: 35, zoom: 9 }}>
                         {/* Ambient lighting */}

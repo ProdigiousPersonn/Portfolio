@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "Test",
+        "PathName": "test",
+        "Description": "Test description",
+        "Tags": ["Hello testing", "MR BEAST!"]
+    },
+    {
+        "Name": "Test2",
+        "PathName": "test2",
+        "Description": "Test description 2",
+        "Tags": ["SIGMA SIGMA BOY"]
+    }
+]

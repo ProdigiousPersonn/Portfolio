@@ -14,10 +14,22 @@
     transform: translate(-50%,-50%);
 }
 
+
+.bgLogo {
+    position: absolute;
+    left: 50%;
+    top: calc(50vh - 700px);
+    z-index: -10;
+    color: var(--bgColor-neutral-muted);
+    font-size:900px;
+    transform: translate(-50%,-50%);
+}
+
+
 .subTitle {
     position: absolute;
     left: 50%;
-    top: calc(40% + 70px);
+    top: calc(50vh - 10px);
     z-index: 10;
     font-size:40px;
     transform: translate(-50%,-50%);

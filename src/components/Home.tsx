@@ -8,37 +8,23 @@ class Home extends Component<any, any> {
     render() {
         return (
             <>
-                <h1 className="title">Prodigious.</h1>
-                <h1 className="bgLogo">P</h1>
-                <h2 className="subTitle">Programmer</h2>
+                <h1 className="title">Aiden Tran.</h1>
+                <h1 className="bgLogo">Aiden Tran</h1>
+                <h2 className="subTitle subHead">Programmer</h2>
                 <div className="model">
-                    <Canvas shadows camera={{ position: [0, 1, 3], fov: 35, zoom: 9 }}>
-                        {/* Ambient lighting */}
+                    <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
                         <ambientLight intensity={1} />
-
                         <Sunlight />
-
-                        {/* Two shoes positioned and rotated */}
-                        <Shoe position={[0, -0.08, 0]} rotation={[0, 0, 0]} />
-
-                        {/* Shadows */}
-                        {/* <AccumulativeShadows position={[0, -0.5, 0]} temporal frames={100} alphaTest={0.75} opacity={0.9}>
-                <RandomizedLight radius={6} position={[5, 5, -10]} bias={0.001} />
-            </AccumulativeShadows> */}
-
-                        {/* Camera controls */}
-                        {/* <CameraControls /> */}
-
-                        {/* Optional environment */}
-                        {/* <Environment preset="city" /> */}
+                        <Keyboard position={[0, -0.08, 0]} rotation={[0, 0, 0]} />
                     </Canvas>
                 </div>
+                <h2 className="subHead">Who is this?</h2>
             </>
         );
     }
 }
 
-type ShoeProps = {
+type KeyProps = {
     position?: [number, number, number];
     rotation?: [number, number, number];
     scale?: number | [number, number, number];
@@ -69,7 +55,7 @@ function Sunlight() {
     );
 }
 
-function Shoe(props: ShoeProps) {
+function Keyboard(props: KeyProps) {
     const groupRef = React.useRef<THREE.Group>(null);
 
     // Track mouse position

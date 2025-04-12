@@ -1,12 +1,15 @@
 :root {
-  --fontStack-monospace: 'Montserrat';
+  --font: 'Montserrat';
+  --headlineFont: 'Xirod';
 }
+
 
 body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   /* margin: 3%; */
-  overflow: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
   background-color: var(--bgColor-default);
   color: var(--fgColor-default);
   /* background: linear-gradient(to top,
@@ -15,7 +18,15 @@ body {
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
-  font-family: var(--fontStack-monospace);
+  font-family: var(--font);
+}
+
+h1 {
+  font-family: var(--headlineFont);
+}
+
+h2 {
+  font-family: var(--headlineFont);
 }
 
 .scrollPage {

@@ -2,17 +2,17 @@
     /* [data-theme="dark"] { */
     /* dark */
     color-scheme: dark;
-    --focus-outlineColor: #1f6feb;
+    --focus-outlineColor: #291feb;
     --fgColor-default: #f0f6fc;
     --fgColor-muted: #9198a1;
-    --fgColor-accent: #de8e39;
+    --fgColor-accent: #eb5858;
     --fgColor-success: #3fb950;
     --fgColor-attention: #d29922;
     --fgColor-danger: #f85149;
     --fgColor-done: #ab7df8;
-    --bgColor-default: #0d1117;
-    --bgColor-muted: #151b23;
-    --bgColor-neutral-muted: #656c7633;
+    --bgColor-default: #070714;
+    --bgColor-muted: #0f0f20;
+    --bgColor-neutral-muted: #0f0f20;
     --bgColor-attention-muted: #bb800926;
     --borderColor-default: #3d444d;
     --borderColor-muted: #3d444db3;

@@ -1,0 +1,41 @@
+.dividerContainer {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dividerLine {
+    vertical-align: middle;
+    width: 100vw;
+    height: 3px;
+    background: var(--borderColor-default);
+}
+
+.dividerMarquee {
+    background: var(--bgColor-muted);
+    vertical-align: middle;
+    margin: 0.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.dividerTrack {
+    display: inline-block;
+    animation: marquee linear infinite;
+    font-family: var(--headlineFont);
+    color: var(--borderColor-muted);
+}
+
+.dividerTrack span {
+    margin: 0 1rem;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

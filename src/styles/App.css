@@ -1,5 +1,7 @@
+
+
 :root {
-  --font: 'Montserrat';
+  --font: 'Michroma';
   --headlineFont: 'Xirod';
 }
 
@@ -51,24 +53,43 @@ h2 {
   --bottom-mask-size: 48px !important;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 100px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: var(--bgColor-muted);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--bgColor-neutral-muted);
   border-radius: 100px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--bgColor-default);
+}
+
+.bevelContainer {
+ position: relative;
+ background: #222;
+ clip-path: polygon(
+   20px 0, calc(100% - 20px) 0,
+   100% 20px, 100% calc(100% - 20px),
+   calc(100% - 20px) 100%, 20px 100%,
+   0 calc(100% - 20px), 0 20px
+ );
+ border-top: 2px solid;
+ border-right: 2px solid;
+ border-bottom: 2px solid;
+ border-left: 2px solid;
+ border-image: linear-gradient(0deg, transparent 0%, #383838 15%, #383838 85%, transparent 100%) 1;
+}
+
+.sectionDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 10;
 }

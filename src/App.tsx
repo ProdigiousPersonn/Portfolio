@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import Navbar from './components/Navbar';
 import BlogDisplay from './components/BlogDisplay';
-import Home from './components/Home';
-import About from './components/About';
+import Home from './components/HomePage/Home';
+import About from './components/HomePage/About';
 import BlogList from './components/BlogList';
 
 function App() {

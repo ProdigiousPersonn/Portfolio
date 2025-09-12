@@ -1,5 +1,5 @@
 import { Component, createRef } from "react";
-import "../styles/Components/divider.css";
+import "../styles/Components/Divider.css";
 
 interface DividerProps {
   text: string;

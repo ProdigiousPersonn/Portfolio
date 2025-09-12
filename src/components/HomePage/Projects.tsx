@@ -1,4 +1,4 @@
-import React, { CSSProperties, Component } from "react";
+import { CSSProperties, Component } from "react";
 import ProjectCard from "../ProjectCard.tsx";
 
 const wrapperStyle: CSSProperties = {

@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 interface CaptionIconProps {
   text: string;
-  imageSize: number;
+  imageSize?: number;
   imagePath: string;
 }
 

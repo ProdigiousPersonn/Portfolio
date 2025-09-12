@@ -10,7 +10,7 @@ import Loading from "./components/LoadingScreen"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <Loading/> */}
+    <Loading/>
     <App />
   </StrictMode>,
 )

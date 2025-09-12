@@ -1,6 +1,5 @@
 // Imports
 import { Component } from 'react';
-import { gsap } from "gsap";
 import "../../styles/Home.css";
 
 // Components

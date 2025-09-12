@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import { lerp } from 'three/src/math/MathUtils';
+import * as THREE from "three";
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -105,12 +105,12 @@ function Keyboard(props: KeyProps) {
             targetRotation.current.x = -mouse.current.y * rotationFactor;
             targetRotation.current.y = mouse.current.x * rotationFactor;
 
-            groupRef.current.rotation.x = lerp(
+            groupRef.current.rotation.x = THREE.MathUtils.lerp(
                 groupRef.current.rotation.x,
                 targetRotation.current.x,
                 0.01
             );
-            groupRef.current.rotation.y = lerp(
+            groupRef.current.rotation.y = THREE.MathUtils.lerp(
                 groupRef.current.rotation.y,
                 targetRotation.current.y,
                 0.01

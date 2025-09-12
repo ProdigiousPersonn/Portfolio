@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { 
     FaUser, FaEnvelope, FaLaptopCode, FaGithub, FaLinkedin, 
-    FaPython, FaJava, FaReact, FaNodeJs, FaCode, FaHtml5, FaCss3,
+    FaPython, FaJava, FaReact, FaNodeJs, FaHtml5, FaCss3,
 } from 'react-icons/fa';
 import { SiLua, SiRobloxstudio, SiElectron, SiCplusplus, SiNextdotjs, SiUnity } from "react-icons/si";
 import { GiPolarBear } from "react-icons/gi";

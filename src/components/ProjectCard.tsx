@@ -192,7 +192,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <h2 style={sectionTitle}>Languages/Frameworks</h2>
       <ul style={listStyle}>
         {languages.map((lang, index) => (
-          <CaptionIcon key={index} text={lang.text} imagePath={lang.imagePath ?? ""} />
+          <CaptionIcon key={index} text={lang.text} imagePath={lang.imagePath ?? ""}/>
         ))}
       </ul>
     </div>

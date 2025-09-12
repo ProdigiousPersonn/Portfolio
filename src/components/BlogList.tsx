@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; import ReactMarkdown from 'react-markdown';
+import { useState, useEffect } from "react"; 
 import '../styles/Markdown.css';
 import { BlogItem } from "./BlogItem.tsx"
 
@@ -11,7 +11,7 @@ interface Item {
 }
 
 function BlogList() {
-    const [data, setData] = useState<Item>([]);
+    const [data, setData] = useState<Item[]>([]);
 
     useEffect(() => {
         fetch("/blogs.json")

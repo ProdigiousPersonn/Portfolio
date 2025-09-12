@@ -3,7 +3,8 @@ import CaptionIcon from "./CaptionIcon.tsx";
 
 interface ProjectCardProps {
   title: string;
-  videoSrc: string;
+  videoSrc?: string;
+  videoCDN?: string;
   status: string;
   createdDate: number;
   description: string;
@@ -117,9 +118,11 @@ const placeholderStyle: CSSProperties = {
   position: "relative",
 };
 
+
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   videoSrc,
+  videoCDN,
   languages,
   status,
   createdDate,
@@ -128,8 +131,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [bgImage, setBgImage] = useState<string | null>(null);
 
+  const finalVideoSrc = videoCDN || videoSrc || "";
+
   useEffect(() => {
-    if (!videoSrc) return;
+    if (!finalVideoSrc) return;
 
     const video = videoRef.current;
     if (!video) return;
@@ -154,16 +159,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
     video.addEventListener("play", updateLoop);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [videoSrc]);
+  }, [finalVideoSrc]);
 
   return (
     <div style={cardStyle} className={"bevelContainer"}>
       {bgImage && <img src={bgImage} style={blurredBackgroundStyle} alt="background" />}
       <div style={videoWrapper}>
-        {videoSrc ? (
+        {finalVideoSrc ? (
           <video
             ref={videoRef}
-            src={videoSrc}
+            src={finalVideoSrc}
             autoPlay
             loop
             muted

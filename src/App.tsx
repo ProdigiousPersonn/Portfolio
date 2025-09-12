@@ -1,23 +1,29 @@
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+
 import Navbar from './components/Navbar';
 import BlogDisplay from './components/BlogDisplay';
 import Home from './components/HomePage/Home';
 import About from './components/HomePage/About';
 import BlogList from './components/BlogList';
 
+import Cursor from "./components/Cursor.tsx"
+
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div style={{ paddingTop: '50px' }}></div>
-      <Routes>
-        <Route index element={<Home/>} />
-        <Route path="/home" element={<Home/>} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/blog" element={<BlogList/>} />
-        <Route path="/blog/:postId" element={<BlogDisplayWrapper />}/>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Cursor/>
+      <BrowserRouter>
+        <Navbar />
+        <div style={{ paddingTop: '50px' }}></div>
+        <Routes>
+          <Route index element={<Home/>} />
+          <Route path="/home" element={<Home/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/blog" element={<BlogList/>} />
+          <Route path="/blog/:postId" element={<BlogDisplayWrapper />}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -1,27 +1,59 @@
-import { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { lerp } from 'three/src/math/MathUtils';
-import React from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 
-class Title extends Component<unknown> {
-    render() {
-        return (
-            <>
-                <h1 className="title">Aiden Tran.</h1>
-                <h1 className="bgLogo">Aiden Tran</h1>
-                <h2 className="subTitle subHead">Programmer</h2>
-                <div className="model">
-                    <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
-                        <ambientLight intensity={1} />
-                        <Sunlight />
-                        <Keyboard position={[0, -0.08, 0]} rotation={[0, 0, 0]} />
-                    </Canvas>
-                </div>
-            </>
-        );
-    }
+gsap.registerPlugin(useGSAP);
+
+function Title() {
+    const containerRef = useRef(null);
+    const titleRef = useRef(null);
+    const subTitleRef = useRef(null);
+    const modelRef = useRef(null);
+    const arrowsRef = useRef(null);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const ctx = gsap.context(() => {
+            gsap.from(titleRef.current, { y: -80, duration: 0.4 });
+
+            gsap.from(subTitleRef.current, { y: -50, duration: 0.6 });
+
+            gsap.from(modelRef.current, { y: 60, duration: 0.8 });
+            gsap.from(modelRef.current, { opacity: 0, duration: 0.5 });
+
+            gsap.from(arrowsRef.current, { opacity: 0, duration: 2 });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
+
+
+
+    return (
+        <div ref={containerRef}>
+            <h1 ref={titleRef} className="title">Aiden Tran.</h1>
+            <h1 className="bgLogo">Aiden Tran</h1>
+            <h2 ref={subTitleRef} className="subTitle subHead">Programmer</h2>
+            <div ref={modelRef} className="model">
+                <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
+                    <ambientLight intensity={1} />
+                    <Sunlight />
+                    <Keyboard position={[0, -0.07, 0]} rotation={[0, 0, 0]} />
+                </Canvas>
+            </div>
+            <div ref={arrowsRef} className="scrollDownContainer">
+                <div className="arrow"></div>
+                <div className="arrow"></div>
+            </div>
+        </div>
+    );
 }
+
 
 type KeyProps = {
     position?: [number, number, number];
@@ -53,13 +85,12 @@ function Sunlight() {
 }
 
 function Keyboard(props: KeyProps) {
-    const groupRef = React.useRef<THREE.Group>(null);
+    const groupRef = useRef<THREE.Group>(null);
 
-    // Track mouse position
-    const mouse = React.useRef({ x: 0, y: 0 });
-    const targetRotation = React.useRef({ x: 0, y: 0 });
+    const mouse = useRef({ x: 0, y: 0 });
+    const targetRotation = useRef({ x: 0, y: 0 });
 
-    React.useEffect(() => {
+    useEffect(() => {
         const handleMouseMove = (event: MouseEvent) => {
             mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -70,9 +101,10 @@ function Keyboard(props: KeyProps) {
 
     useFrame(() => {
         if (groupRef.current) {
-            const rotationFactor = 0.2; 
-            targetRotation.current.x = -mouse.current.y * rotationFactor; 
+            const rotationFactor = 0.2;
+            targetRotation.current.x = -mouse.current.y * rotationFactor;
             targetRotation.current.y = mouse.current.x * rotationFactor;
+
             groupRef.current.rotation.x = lerp(
                 groupRef.current.rotation.x,
                 targetRotation.current.x,
@@ -85,7 +117,6 @@ function Keyboard(props: KeyProps) {
             );
         }
     });
-
 
     const { nodes, materials } = useGLTF('/models/gmmkpro.gltf') as any;
 
@@ -100,5 +131,7 @@ function Keyboard(props: KeyProps) {
         </group>
     );
 }
+
+useGLTF.preload('/models/gmmkpro.gltf');
 
 export default Title;

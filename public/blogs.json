@@ -1,14 +1,8 @@
 [
     {
-        "Name": "Test",
-        "PathName": "test",
+        "Name": "Rollback Netcode: The Secret Weapon of Competitive Fighting Games",
+        "PathName": "rollbacknetcode",
         "Description": "Test description",
         "Tags": ["Tag1, Tag2"]
-    },
-    {
-        "Name": "Test2",
-        "PathName": "test2",
-        "Description": "Test description 2",
-        "Tags": ["Tag2"]
     }
 ]

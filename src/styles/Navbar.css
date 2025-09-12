@@ -7,7 +7,19 @@
     padding-top: 10px;
     overflow: hidden;
     position:fixed;
+    z-index: 10000;
 }
+
+.navbarBackground {
+    height:90px;
+    width:100vw;
+    position: fixed;
+    top:0;
+    right:0;
+    background: linear-gradient(to right, var(--bgColor-muted) 0px, transparent 1000px);
+    z-index: 9999;
+}
+
 .NavbarButton {
     position: relative;
     background: none;
@@ -29,7 +41,7 @@
 
 .Logo {
     /* margin: .67em 0; */
-    font-weight: var(--base-text-weight-semibold, 600);
+    font-weight: var(--base-text-weight-zx, 600);
     /* padding-bottom: .3em; */
     font-size: 2em;
     /* border-bottom: 1px solid var(--borderColor-muted); */

@@ -4,7 +4,6 @@ import {
     FaPython, FaJava, FaReact, FaNodeJs, FaHtml5, FaCss3,
 } from 'react-icons/fa';
 import { SiLua, SiRobloxstudio, SiElectron, SiCplusplus, SiNextdotjs, SiUnity } from "react-icons/si";
-import { GiPolarBear } from "react-icons/gi";
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -31,136 +30,57 @@ const About: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const cvButtonRef = useRef<HTMLButtonElement>(null);
 
-    useGSAP(
-        (context) => {
-            const q = context.selector!;
+    useGSAP((context) => {
+        const el = containerRef.current;
+        if (!el) return;
 
-            gsap.set([cvButtonRef.current, q(".aboutBox")], { opacity: 0, y: 50 });
-            gsap.set(q(".aboutIcon"), { scale: 0, rotation: -180 });
-            gsap.set(q(".aboutHeading"), { opacity: 0, x: -30 });
-            gsap.set(q(".sectionDivider"), { scaleX: 0 });
-            gsap.set(q(".aboutText, .contactTableItem, .gridItem, .tableItem"), {
-                opacity: 0,
-                y: 20,
-            });
-            gsap.set(q(".aboutImage"), { opacity: 0, scale: 0.8 });
+        const q = context.selector!;
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 80%",
-                end: "bottom 20%",
-                toggleActions: "play none none none",
-                markers: true,
-                },
-            });
+        gsap.set([cvButtonRef.current, q(".aboutBox")], { opacity: 0, y: 50 });
+        gsap.set(q(".aboutIcon"), { scale: 0, rotation: -180 });
+        gsap.set(q(".aboutHeading"), { opacity: 0, x: -30 });
+        gsap.set(q(".sectionDivider"), { scaleX: 0 });
+        gsap.set(q(".aboutText, .contactTableItem, .gridItem, .tableItem"), {
+        opacity: 0,
+        y: 20,
+        });
+        gsap.set(q(".aboutImage"), { opacity: 0, scale: 0.8 });
 
-            tl.to(cvButtonRef.current, {
-                opacity: 1,
-                y: 0,
-                duration: 0.27,
-                ease: "back.out(1.7)",
-            })
-                .to(
-                q(".aboutBox"),
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.36,
-                    stagger: 0.09,
-                    ease: "power3.out",
-                },
-                "-=0.135"
-                )
-                .to(
-                q(".aboutIcon"),
-                {
-                    scale: 1,
-                    rotation: 0,
-                    duration: 0.27,
-                    stagger: 0.045,
-                    ease: "back.out(1.7)",
-                },
-                "-=0.18"
-                )
-                .to(
-                q(".aboutHeading"),
-                {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.225,
-                    stagger: 0.045,
-                    ease: "power2.out",
-                },
-                "-=0.135"
-                )
-                .to(
-                q(".sectionDivider"),
-                {
-                    scaleX: 1,
-                    duration: 0.18,
-                    stagger: 0.045,
-                    ease: "power2.inOut",
-                },
-                "-=0.09"
-                )
-                .to(
-                q(".aboutText"),
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.225,
-                    ease: "power2.out",
-                },
-                "-=0.09"
-                )
-                .to(
-                q(".aboutImage"),
-                {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.27,
-                    ease: "back.out(1.7)",
-                },
-                "-=0.135"
-                )
-                .to(
-                q(".contactTableItem"),
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.18,
-                    stagger: 0.045,
-                    ease: "power2.out",
-                },
-                "-=0.18"
-                )
-                .to(
-                q(".gridItem"),
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.135,
-                    stagger: 0.0225,
-                    ease: "power2.out",
-                },
-                "-=0.135"
-                )
-                .to(
-                q(".tableItem"),
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.225,
-                    stagger: 0.0675,
-                    ease: "power2.out",
-                },
-                "-=0.09"
-                );
-            ScrollTrigger.refresh();
-        },
-        { scope: containerRef }
-    );
+        const timer = setTimeout(() => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+            trigger: el,
+            start: "top 80%",
+            end: "bottom 20%",
+            // toggleActions: "play none none none",
+            // markers: true,
+            },
+        });
+
+        tl.to(cvButtonRef.current, { opacity: 1, y: 0, duration: 0.27, ease: "back.out(1.7)" })
+            .to(q(".aboutBox"), { opacity: 1, y: 0, duration: 0.36, stagger: 0.09, ease: "power3.out" }, "-=0.135")
+            .to(q(".aboutIcon"), { scale: 1, rotation: 0, duration: 0.27, stagger: 0.045, ease: "back.out(1.7)" }, "-=0.18")
+            .to(q(".aboutHeading"), { opacity: 1, x: 0, duration: 0.225, stagger: 0.045, ease: "power2.out" }, "-=0.135")
+            .to(q(".sectionDivider"), { scaleX: 1, duration: 0.18, stagger: 0.045, ease: "power2.inOut" }, "-=0.09")
+            .to(q(".aboutText"), { opacity: 1, y: 0, duration: 0.225, ease: "power2.out" }, "-=0.09")
+            .to(q(".aboutImage"), { opacity: 1, scale: 1, duration: 0.27, ease: "back.out(1.7)" }, "-=0.135")
+            .to(q(".contactTableItem"), { opacity: 1, y: 0, duration: 0.18, stagger: 0.045, ease: "power2.out" }, "-=0.18")
+            .to(q(".gridItem"), { opacity: 1, y: 0, duration: 0.135, stagger: 0.0225, ease: "power2.out" }, "-=0.135")
+            .to(q(".tableItem"), { opacity: 1, y: 0, duration: 0.225, stagger: 0.0675, ease: "power2.out" }, "-=0.09");
+
+        ScrollTrigger.refresh();
+        }, 50);
+
+        const observer = new ResizeObserver(() => ScrollTrigger.refresh());
+        observer.observe(el);
+
+        return () => {
+        clearTimeout(timer);
+        observer.disconnect();
+        ScrollTrigger.getAll().forEach(st => st.kill());
+        };
+    }, { scope: containerRef });
+
 
     return (
         <div ref={containerRef}>
@@ -256,18 +176,18 @@ const About: React.FC = () => {
                             <div className="tableGrid">
                                 <div className="tableItem gridItem">
                                     <div className="experienceHeader">
-                                        <div className="experienceTitle">Computer Science Student</div>
+                                        <div className="experienceTitle">Computer Science Major</div>
                                         <span className="experienceDate">2025 - 2029</span>
                                     </div>
                                     <div className="experienceDivider"></div>
                                     <div className="experienceHeader">
-                                        <div className="experienceCompany">University of California, Berkeley <GiPolarBear/> </div>
+                                        <div className="experienceCompany">University of California, Berkeley </div>
                                         <span className="experienceDescription">Pursuing Bachelor's degree in Computer Science with a 4.0 GPA.</span>
                                     </div>
                                 </div>
                                 <div className="tableItem gridItem">
                                     <div className="experienceHeader">
-                                        <div className="experienceTitle">Software Development Intern</div>
+                                        <div className="experienceTitle">Intern</div>
                                         <span className="experienceDate">Summer 2024</span>
                                     </div>
                                     <div className="experienceDivider"></div>

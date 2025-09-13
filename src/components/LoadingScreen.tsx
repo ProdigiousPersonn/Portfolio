@@ -16,8 +16,15 @@ const Loader: React.FC = () => {
       }, 1000);
     };
 
-    window.addEventListener("load", handleLoading);
-    return () => window.removeEventListener("load", handleLoading);
+    if (document.readyState === "complete") {
+      handleLoading();
+    } else {
+      window.addEventListener("load", handleLoading);
+    }
+
+    return () => {
+      window.removeEventListener("load", handleLoading);
+    };
   }, []);
 
   if (!isVisible) {

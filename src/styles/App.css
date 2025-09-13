@@ -1,5 +1,10 @@
 
 
+@font-face {
+    font-family: 'Xirod';
+    src: url('/fonts/Xirod/Xirod.otf');
+}
+
 :root {
   --font: 'Michroma';
   --headlineFont: 'Xirod';

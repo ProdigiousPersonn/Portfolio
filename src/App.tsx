@@ -27,11 +27,9 @@ function App() {
   );
 }
 
-// Wrapper component for BlogDisplay to handle dynamic routing
 function BlogDisplayWrapper() {
   const { postId } = useParams();
 
-  // Construct the fileName dynamically based on postId
   console.log(postId);
   const fileName = `${postId}`;
 

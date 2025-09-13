@@ -131,7 +131,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [bgImage, setBgImage] = useState<string | null>(null);
 
-  const finalVideoSrc = videoCDN || videoSrc || "";
+  const finalVideoSrc = import.meta.env.PROD ? (videoCDN || videoSrc || "") : (videoSrc || videoCDN || "");
 
   useEffect(() => {
     if (!finalVideoSrc) return;
@@ -198,5 +198,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
   );
 };
+
 
 export default ProjectCard;

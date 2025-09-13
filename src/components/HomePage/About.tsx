@@ -28,7 +28,7 @@ const Box: React.FC<BoxProps> = ({ children, className = '', flexGrow = 1 }) => 
 
 const About: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const cvButtonRef = useRef<HTMLButtonElement>(null);
+    const cvButtonRef = useRef<HTMLAnchorElement>(null);
 
     useGSAP((context) => {
         const el = containerRef.current;
@@ -84,7 +84,15 @@ const About: React.FC = () => {
 
     return (
         <div ref={containerRef}>
-            <button ref={cvButtonRef} className="cvButton bevelContainer">Download Resume</button>
+            <a 
+                ref={cvButtonRef} 
+                className="cvButton bevelContainer" 
+                href="https://docs.google.com/document/d/15XsQiQ9Ve6SaYzA75a2NN_CBKZd0AZw5pGCpJen6u_k/export?format=pdf"
+                target="_blank" 
+                rel="noopener noreferrer" 
+            >
+                Download Resume
+            </a>
             <div className="aboutWrapper">
                 <div className="aboutContainer">
                     <div className="aboutColumn">

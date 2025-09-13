@@ -1,0 +1,107 @@
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(0deg, var(--bgColor-light), var(--bgColor-muted));
+  border-radius: 0.75rem;
+}
+
+.projectCardVideoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  z-index: 1;
+}
+
+.projectCardVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.projectCardTitle {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 700;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.projectCardDate {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #aaa;
+}
+
+.projectCardStatus {
+  font-size: 0.85rem;
+  margin: 0 0 0.25rem 0;
+  font-weight: 500;
+  color: #ddd;
+  z-index: 2;
+  position: relative;
+}
+
+.projectCardSectionTitle {
+  font-size: 1rem;
+  margin: 0.25rem 0 0.5rem 0;
+  font-weight: 600;
+  z-index: 2;
+  position: relative;
+}
+
+.projectCardDescription {
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0.75rem 0;
+  line-height: 1.4;
+  z-index: 2;
+  position: relative;
+  opacity: 0.9;
+}
+
+.projectCardList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.projectCardPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/9;
+  font-size: 1rem;
+  color: #ccc;
+  z-index: 1;
+  position: relative;
+}
+
+.projectCardSectionDivider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0.5rem 0;
+}

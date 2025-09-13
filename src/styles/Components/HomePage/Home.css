@@ -10,7 +10,8 @@
     left: 50%;
     top: calc(50vh - 150px);
     z-index: 10;
-    font-size:90px;
+    font-size:6rem;
+    text-align: center;
     transform: translate(-50%,-50%);
     white-space: nowrap;
 }
@@ -113,4 +114,23 @@
   50% {
     opacity: 1;
   }
+}
+
+@media (max-width: 950px) {
+    .title {
+        font-size:12vw;
+        white-space: wrap;
+        line-height: 12vw;
+        transform: translate(-50%,-50%);
+        left:50%;
+    }
+    .subTitle {
+      top: calc(37vh + 15vw);
+    }
+}
+
+@media (max-width: 480px) {
+    .aboutWrapper {
+        padding: 1rem;
+    }
 }

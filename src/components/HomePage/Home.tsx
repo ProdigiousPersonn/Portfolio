@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import "../../styles/Home.css";
+import "../../styles/Components/HomePage/Home.css";
 
 import About from "./About.tsx";
 import Title from "./Title.tsx";

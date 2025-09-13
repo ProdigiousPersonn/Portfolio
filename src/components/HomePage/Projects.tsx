@@ -1,26 +1,6 @@
-import { CSSProperties, Component } from "react";
+import { Component } from "react";
 import ProjectCard from "../ProjectCard.tsx";
-
-const wrapperStyle: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "flex-start",
-  width: "100vw",
-  boxSizing: "border-box",
-  overflowY: "auto",
-};
-
-const container: CSSProperties = {
-  display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gap: "2rem",
-  background: "var(--bgColor)",
-  width: "98vw",
-  maxWidth: "1400px",
-  padding: "2%",
-  boxSizing: "border-box",
-};
-
+import "../../styles/Components/HomePage/Projects.css";
 
 const projectData = [
   {
@@ -82,9 +62,10 @@ const projectData = [
     status: "Main Developer",
     teamSize: 1,
     projectType: "Web Development",
-     tags: [ "Functional Programming" ],
+    tags: [ "Functional Programming" ],
     languages: [
       { text: "React", imagePath: "/images/icons/react.svg" },
+      { text: "ThreeJS", imagePath: "/images/icons/threejs.svg" },
       { text: "TypeScript", imagePath: "/images/icons/typescript.svg" },
       { text: "HTML", imagePath: "/images/icons/html.svg" },
       { text: "CSS", imagePath: "/images/icons/css.svg" }
@@ -95,14 +76,15 @@ const projectData = [
 class Projects extends Component {
   render() {
     return (
-      <div style={wrapperStyle}>
-        <div style={container}>
+      <div className="projectsWrapper">
+        <div className="projectsContainer">
           {projectData.map((project, index) => (
             <ProjectCard
               key={index}
               title={project.title}
               description={project.description}
               videoSrc={project.videoSrc}
+              videoCDN={project.videoCDN}
               createdDate={project.createdDate}
               status={project.status}
               languages={project.languages}

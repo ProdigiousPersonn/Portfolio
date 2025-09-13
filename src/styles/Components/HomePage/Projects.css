@@ -1,0 +1,35 @@
+.projectsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.projectsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  background: var(--bgColor);
+  width: 98vw;
+  max-width: 1400px;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 1024px) {
+  .projectsContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .projectsContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}

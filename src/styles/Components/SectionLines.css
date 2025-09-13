@@ -1,0 +1,16 @@
+
+
+.sectionLine {
+  width: var(--line-width, 100%);
+  height: var(--line-height, 2px);
+  background-color: var(--line-color, black);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* @media (max-width: 600px) {
+  .sectionLine {
+    background-color: transparent !important;
+    height: 0 !important;
+  }
+} */

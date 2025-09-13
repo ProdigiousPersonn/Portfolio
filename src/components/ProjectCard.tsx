@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef, useState, useEffect } from "react";
+import React, { CSSProperties } from "react";
 import CaptionIcon from "./CaptionIcon.tsx";
 
 interface ProjectCardProps {
@@ -22,6 +22,7 @@ const cardStyle: CSSProperties = {
   overflow: "hidden",
   color: "#fff",
   background: "rgba(0,0,0,0.5)",
+  borderRadius: "0.75rem",
 };
 
 const videoWrapper: CSSProperties = {
@@ -29,26 +30,16 @@ const videoWrapper: CSSProperties = {
   width: "100%",
   aspectRatio: "16/9",
   overflow: "hidden",
+  borderRadius: "0.5rem",
+  zIndex: 1,
 };
 
 const videoStyle: CSSProperties = {
   width: "100%",
   height: "100%",
   objectFit: "cover",
-  zIndex: 1,
-  position: "relative",
-};
-
-const blurredBackgroundStyle: CSSProperties = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  filter: "blur(40px) brightness(0.5)",
-  transform: "scale(1.2)",
-  zIndex: 0,
-  objectFit: "cover",
+  borderRadius: "0.5rem",
+  display: "block",
 };
 
 const titleStyle: CSSProperties = {
@@ -118,7 +109,6 @@ const placeholderStyle: CSSProperties = {
   position: "relative",
 };
 
-
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   videoSrc,
@@ -128,47 +118,46 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   createdDate,
   description,
 }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [bgImage, setBgImage] = useState<string | null>(null);
-
   const isProduction = window.location.hostname !== "localhost";
-  const finalVideoSrc = isProduction ? (videoCDN || videoSrc || "") : (videoSrc || videoCDN || "");
-
-  useEffect(() => {
-    if (!finalVideoSrc) return;
-
-    const video = videoRef.current;
-    if (!video) return;
-
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const captureFrame = () => {
-      canvas.width = 100;
-      canvas.height = 57;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const dataURL = canvas.toDataURL();
-      setBgImage(dataURL);
-    };
-
-    let animationFrameId: number;
-    const updateLoop = () => {
-      if (!video.paused && !video.ended) captureFrame();
-      animationFrameId = requestAnimationFrame(updateLoop);
-    };
-
-    video.addEventListener("play", updateLoop);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [finalVideoSrc]);
-
+  const finalVideoSrc = isProduction
+    ? videoCDN || videoSrc || ""
+    : videoSrc || videoCDN || "";
   return (
-    <div style={cardStyle} className={"bevelContainer"}>
-      {bgImage && <img src={bgImage} style={blurredBackgroundStyle} alt="background" />}
-      <div style={videoWrapper}>
-        {finalVideoSrc ? (
+    <div style={cardStyle} className="bevelContainer">
+      {finalVideoSrc ? (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            zIndex: 0,
+          }}
+        >
           <video
-            ref={videoRef}
+            src={finalVideoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              ...videoStyle,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "blur(40px) brightness(0.5)",
+              transform: "scale(1.2)",
+            }}
+          />
+        </div>
+      ) : (
+        <div style={placeholderStyle}>No Video Available</div>
+      )}
+      <div style={videoWrapper}>
+        {finalVideoSrc && (
+          <video
             src={finalVideoSrc}
             autoPlay
             loop
@@ -176,29 +165,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             playsInline
             style={videoStyle}
           />
-        ) : (
-          <div style={placeholderStyle}>No Video Available</div>
         )}
       </div>
-
       <h1 style={titleStyle}>
         {title} <span style={dateStyle}>({createdDate})</span>
       </h1>
       <h2 style={statusStyle}>{status}</h2>
-      <div className={"sectionDivider"} />
-
+      <div className="sectionDivider" />
       <p style={descriptionStyle}>{description}</p>
-      <div className={"sectionDivider"} />
-
+      <div className="sectionDivider" />
       <h2 style={sectionTitle}>Languages/Frameworks</h2>
       <ul style={listStyle}>
         {languages.map((lang, index) => (
-          <CaptionIcon key={index} text={lang.text} imagePath={lang.imagePath ?? ""}/>
+          <CaptionIcon
+            key={index}
+            text={lang.text}
+            imagePath={lang.imagePath ?? ""}
+          />
         ))}
       </ul>
     </div>
   );
 };
-
 
 export default ProjectCard;

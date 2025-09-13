@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Components/SectionLines.css";
 
 interface DoubleLinesProps {
   lineWidth?: string;
@@ -15,6 +16,7 @@ const DoubleLines: React.FC<DoubleLinesProps> = ({
   gap = 4,
   spacing = 40,
 }) => {
+  const isMobile = window.innerWidth <= 600;
   const LinePair = () => (
     <div
       style={{
@@ -24,8 +26,24 @@ const DoubleLines: React.FC<DoubleLinesProps> = ({
         alignItems: "center",
       }}
     >
-      <div style={{ width: lineWidth, height: lineHeight, backgroundColor: lineColor, opacity: 0.6 }} />
-      <div style={{ width: lineWidth, height: lineHeight, backgroundColor: lineColor, opacity: 0.6 }} />
+      <div
+        className="sectionLine"
+        style={{
+          width: lineWidth,
+          height: isMobile ? "1px" : lineHeight,
+          backgroundColor: isMobile ? "rgba(0,0,0,1)" : lineColor,
+          opacity: 0.6,
+        }}
+      />
+      <div
+        className="sectionLine"
+        style={{
+          width: lineWidth,
+          height: isMobile ? "1px" : lineHeight,
+          backgroundColor: isMobile ? "rgba(0,0,0,1)" : lineColor,
+          opacity: 0.6,
+        }}
+      />
     </div>
   );
 

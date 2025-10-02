@@ -13,7 +13,7 @@ const Loader: React.FC = () => {
           ease: "power2.out",
           onComplete: () => setIsVisible(false),
         });
-      }, 1000);
+      }, 500);
     };
 
     if (document.readyState === "complete") {

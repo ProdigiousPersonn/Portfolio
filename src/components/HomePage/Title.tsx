@@ -3,36 +3,26 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from "three";
 import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(useGSAP);
 
 function Title() {
-    const containerRef = useRef(null);
-    const titleRef = useRef(null);
-    const subTitleRef = useRef(null);
-    const modelRef = useRef(null);
-    const arrowsRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subTitleRef = useRef<HTMLHeadingElement>(null);
+    const modelRef = useRef<HTMLDivElement>(null);
+    const arrowsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || !titleRef.current || !subTitleRef.current || !modelRef.current || !arrowsRef.current) return;
 
         const ctx = gsap.context(() => {
             gsap.from(titleRef.current, { y: -80, duration: 0.4 });
-
             gsap.from(subTitleRef.current, { y: -50, duration: 0.6 });
-
-            gsap.from(modelRef.current, { y: 60, duration: 0.8 });
-            gsap.from(modelRef.current, { opacity: 0, duration: 0.5 });
-
+            gsap.from(modelRef.current, { y: 60, opacity: 0, duration: 0.8 });
             gsap.from(arrowsRef.current, { opacity: 0, duration: 2 });
         }, containerRef);
 
         return () => ctx.revert();
     }, []);
-
-
-
 
     return (
         <div ref={containerRef}>
@@ -43,7 +33,7 @@ function Title() {
                 <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
                     <ambientLight intensity={1} />
                     <Sunlight />
-                    <Keyboard position={[0, -0.07, 0]} rotation={[0, 0, 0]} />
+                    <Keyboard position={[0, -0.07, 0]} />
                 </Canvas>
             </div>
             <div ref={arrowsRef} className="scrollDownContainer">
@@ -53,7 +43,6 @@ function Title() {
         </div>
     );
 }
-
 
 type KeyProps = {
     position?: [number, number, number];
@@ -86,7 +75,6 @@ function Sunlight() {
 
 function Keyboard(props: KeyProps) {
     const groupRef = useRef<THREE.Group>(null);
-
     const mouse = useRef({ x: 0, y: 0 });
     const targetRotation = useRef({ x: 0, y: 0 });
 
@@ -105,16 +93,8 @@ function Keyboard(props: KeyProps) {
             targetRotation.current.x = -mouse.current.y * rotationFactor;
             targetRotation.current.y = mouse.current.x * rotationFactor;
 
-            groupRef.current.rotation.x = THREE.MathUtils.lerp(
-                groupRef.current.rotation.x,
-                targetRotation.current.x,
-                0.01
-            );
-            groupRef.current.rotation.y = THREE.MathUtils.lerp(
-                groupRef.current.rotation.y,
-                targetRotation.current.y,
-                0.01
-            );
+            groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotation.current.x, 0.01);
+            groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotation.current.y, 0.01);
         }
     });
 
@@ -127,7 +107,6 @@ function Keyboard(props: KeyProps) {
             <mesh geometry={nodes.KeyLight.geometry} material={materials['DarkBlue']} />
             <mesh geometry={nodes.KeyDark.geometry} material={materials['DarkBlue.001']} />
             <mesh geometry={nodes.KeyOrange.geometry} material={materials['Orange']} />
-            {/* <mesh geometry={nodes.Backlight.geometry} material={materials['Backlight']} /> */}
         </group>
     );
 }

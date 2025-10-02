@@ -31,6 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {finalVideoSrc ? (
         <div className="projectCardVideoWrapper">
           <video
+            preload="none"
             src={finalVideoSrc}
             autoPlay
             loop

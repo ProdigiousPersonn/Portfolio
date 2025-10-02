@@ -41,34 +41,34 @@ const About: React.FC = () => {
         gsap.set(q(".aboutHeading"), { opacity: 0, x: -30 });
         gsap.set(q(".sectionDivider"), { scaleX: 0 });
         gsap.set(q(".aboutText, .contactTableItem, .gridItem, .tableItem"), {
-        opacity: 0,
-        y: 20,
+            opacity: 0,
+            y: 20,
         });
         gsap.set(q(".aboutImage"), { opacity: 0, scale: 0.8 });
 
         const timer = setTimeout(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-            trigger: el,
-            start: "top 80%",
-            end: "bottom 20%",
-            // toggleActions: "play none none none",
-            // markers: true,
-            },
-        });
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                trigger: el,
+                start: "top 80%",
+                end: "bottom 20%",
+                // toggleActions: "play none none none",
+                // markers: true,
+                },
+            });
 
-        tl.to(cvButtonRef.current, { opacity: 1, y: 0, duration: 0.27, ease: "back.out(1.7)" })
-            .to(q(".aboutBox"), { opacity: 1, y: 0, duration: 0.36, stagger: 0.09, ease: "power3.out" }, "-=0.135")
-            .to(q(".aboutIcon"), { scale: 1, rotation: 0, duration: 0.27, stagger: 0.045, ease: "back.out(1.7)" }, "-=0.18")
-            .to(q(".aboutHeading"), { opacity: 1, x: 0, duration: 0.225, stagger: 0.045, ease: "power2.out" }, "-=0.135")
-            .to(q(".sectionDivider"), { scaleX: 1, duration: 0.18, stagger: 0.045, ease: "power2.inOut" }, "-=0.09")
-            .to(q(".aboutText"), { opacity: 1, y: 0, duration: 0.225, ease: "power2.out" }, "-=0.09")
-            .to(q(".aboutImage"), { opacity: 1, scale: 1, duration: 0.27, ease: "back.out(1.7)" }, "-=0.135")
-            .to(q(".contactTableItem"), { opacity: 1, y: 0, duration: 0.18, stagger: 0.045, ease: "power2.out" }, "-=0.18")
-            .to(q(".gridItem"), { opacity: 1, y: 0, duration: 0.135, stagger: 0.0225, ease: "power2.out" }, "-=0.135")
-            .to(q(".tableItem"), { opacity: 1, y: 0, duration: 0.225, stagger: 0.0675, ease: "power2.out" }, "-=0.09");
+            tl.to(cvButtonRef.current, { opacity: 1, y: 0, duration: 0.18, ease: "back.out(1.7)" })
+            .to(q(".aboutBox"), { opacity: 1, y: 0, duration: 0.24, stagger: 0.06, ease: "power3.out" }, "-=0.12")
+            .to(q(".aboutIcon"), { scale: 1, rotation: 0, duration: 0.18, stagger: 0.03, ease: "back.out(1.7)" }, "-=0.15")
+            .to(q(".aboutHeading"), { opacity: 1, x: 0, duration: 0.15, stagger: 0.03, ease: "power2.out" }, "-=0.12")
+            .to(q(".sectionDivider"), { scaleX: 1, duration: 0.12, stagger: 0.03, ease: "power2.inOut" }, "-=0.06")
+            .to(q(".aboutText"), { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" }, "-=0.06")
+            .to(q(".aboutImage"), { opacity: 1, scale: 1, duration: 0.18, ease: "back.out(1.7)" }, "-=0.12")
+            .to(q(".contactTableItem"), { opacity: 1, y: 0, duration: 0.12, stagger: 0.03, ease: "power2.out" }, "-=0.12")
+            .to(q(".gridItem"), { opacity: 1, y: 0, duration: 0.09, stagger: 0.015, ease: "power2.out" }, "-=0.09")
+            .to(q(".tableItem"), { opacity: 1, y: 0, duration: 0.15, stagger: 0.045, ease: "power2.out" }, "-=0.06");
 
-        ScrollTrigger.refresh();
+            ScrollTrigger.refresh();
         }, 50);
 
         const observer = new ResizeObserver(() => ScrollTrigger.refresh());

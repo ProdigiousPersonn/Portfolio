@@ -1,8 +1,8 @@
 .projectCard {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 0.75rem;
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -10,6 +10,7 @@
   color: #fff;
   background: linear-gradient(0deg, var(--bgColor-light), var(--bgColor-muted));
   border-radius: 0.75rem;
+  padding-bottom: 1.5rem;
 }
 
 .projectCardVideoWrapper {
@@ -32,25 +33,25 @@
 }
 
 .projectCardTitle {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   margin: 0;
   font-weight: 700;
   z-index: 2;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .projectCardDate {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 400;
   color: #aaa;
 }
 
 .projectCardStatus {
-  font-size: 0.85rem;
-  margin: 0 0 0.25rem 0;
+  font-size: 0.8rem;
+  margin: 0;
   font-weight: 500;
   color: #ddd;
   z-index: 2;
@@ -58,17 +59,17 @@
 }
 
 .projectCardSectionTitle {
-  font-size: 1rem;
-  margin: 0.25rem 0 0.5rem 0;
+  font-size: 0.95rem;
+  margin: 0;
   font-weight: 600;
   z-index: 2;
   position: relative;
 }
 
 .projectCardDescription {
-  font-size: 0.9rem;
-  margin: 0.25rem 0 0.75rem 0;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.25;
   z-index: 2;
   position: relative;
   opacity: 0.9;
@@ -78,7 +79,7 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   z-index: 2;
@@ -93,7 +94,7 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 16/9;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #ccc;
   z-index: 1;
   position: relative;
@@ -103,5 +104,5 @@
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.15);
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
 }

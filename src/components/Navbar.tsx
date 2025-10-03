@@ -28,7 +28,7 @@ const Navbar = () => {
             <ul className="Navbar">
                 <Link className="NavbarButton Logo" to={"/home"}>P</Link>
                 {/* <Link to={"/projects"} className="NavbarButton Links">Projects</Link> */}
-                {/* <Link to={"/blog"} className="NavbarButton Links">Blog</Link> */}
+                <Link to={"/blog"} className="NavbarButton Links">Blog</Link>
             </ul>
         </>
     );

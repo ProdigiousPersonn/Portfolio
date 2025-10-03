@@ -1,3 +1,8 @@
 [
-
+    {
+        "Name": "Rollback Netcode: Insights & Setbacks",
+        "PathName": "rollbacknetcode",
+        "Description": "A personal look into the challenges and takeaways from working with rollback netcode in online games.",
+        "Tags": ["Networking", "Game Development"]
+    }
 ]

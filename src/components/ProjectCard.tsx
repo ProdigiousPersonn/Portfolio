@@ -58,6 +58,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             key={index}
             text={lang.text}
             imagePath={lang.imagePath ?? ""}
+            layout="row"
           />
         ))}
       </ul>

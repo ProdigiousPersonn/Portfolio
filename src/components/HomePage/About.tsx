@@ -7,6 +7,7 @@ import { SiLua, SiRobloxstudio, SiElectron, SiCplusplus, SiNextdotjs, SiUnity } 
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import CvButton from "../CvButton.tsx"
 import '../../styles/Components/HomePage/About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -84,15 +85,7 @@ const About: React.FC = () => {
 
     return (
         <div ref={containerRef}>
-            <a 
-                ref={cvButtonRef} 
-                className="cvButton bevelContainer" 
-                href="https://docs.google.com/document/d/15XsQiQ9Ve6SaYzA75a2NN_CBKZd0AZw5pGCpJen6u_k/export?format=pdf"
-                target="_blank" 
-                rel="noopener noreferrer" 
-            >
-                Download Resume
-            </a>
+            <CvButton ref={cvButtonRef} />
             <div className="aboutWrapper">
                 <div className="aboutContainer">
                     <div className="aboutColumn">

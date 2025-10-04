@@ -13,7 +13,7 @@ interface BlogItemButtonProps {
 const BlogItem: React.FC<BlogItemButtonProps> = ({ pathName, name, description, tags }) => {
     return (
         <Link to={`/blog/${pathName}`}>
-            <div className="blogItem">
+            <div className="bevelContainer blogItem">
                 <h1>
                     {name}
                 </h1>

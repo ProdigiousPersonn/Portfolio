@@ -11,12 +11,14 @@
 }
 
 .navbarBackground {
-    height:90px;
-    width:100vw;
+    height: 90px;
+    width: 100vw;
     position: fixed;
-    top:0;
-    right:0;
-    background: linear-gradient(to right, var(--bgColor-muted) 0px, transparent 1000px);
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 9999;
 }
 

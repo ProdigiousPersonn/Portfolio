@@ -21,7 +21,7 @@ function BlogList() {
 
     return (
         <>
-            <h1>Blogs</h1>
+            <h1>Writeups</h1>
             <ul>
                 {data.map((item : Item, _index : number) => (
                     <BlogItem

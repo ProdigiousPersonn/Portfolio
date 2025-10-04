@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import '../styles/Markdown.css';
 import '../styles/Code.css';
 
@@ -38,7 +39,7 @@ class BlogDisplay extends Component<DisplayProps, DisplayState> {
   render() {
     const { markdown } = this.state;
     return (
-      <ReactMarkdown className="markdown-body scrollPage is-top-overflowing">
+      <ReactMarkdown rehypePlugins={[rehypeRaw]} className="markdown-body is-top-overflowing">
         {markdown}
       </ReactMarkdown>
     );

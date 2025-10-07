@@ -57,6 +57,10 @@ button {
   font-family: var(--headlineFont);
 }
 
+.headerFont {
+    font-family: var(--headlineFont);
+}
+
 a {
   color: var(--fgColor-accent);
   text-decoration: none;

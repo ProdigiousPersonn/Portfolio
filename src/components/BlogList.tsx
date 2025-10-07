@@ -22,7 +22,7 @@ function BlogList() {
     return (
         <>
             <h1>Writeups</h1>
-            <ul>
+            <ul className="blogList">
                 {data.map((item : Item, _index : number) => (
                     <BlogItem
                         index = {_index}

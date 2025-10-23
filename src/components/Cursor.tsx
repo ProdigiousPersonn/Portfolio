@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useState, useCallback } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 interface InteractiveCursorProps {
   size?: number;
@@ -19,59 +18,40 @@ export function InteractiveCursor({
   zIndex = 100000000,
   selector = "a, button, input, textarea, select, [role='button'], [data-cursor='interactive']",
 }: InteractiveCursorProps) {
-  const elRef = useRef<HTMLDivElement | null>(null);
-  const pos = useRef({ x: 0, y: 0 });
-  const target = useRef({ x: 0, y: 0 });
-
   const [visible, setVisible] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
 
-  useGSAP(() => {
-    if (!elRef.current) return;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-    const half = size / 2;
+  const damping = 20 + trail * 30;
+  const stiffness = 400 - trail * 200;
 
-    gsap.ticker.add(() => {
-      gsap.to(pos.current, {
-        x: target.current.x,
-        y: target.current.y,
-        duration: (1 - trail) * 0.1,
-        overwrite: true,
-        onUpdate: () => {
-          gsap.set(elRef.current, {
-            x: pos.current.x - half,
-            y: pos.current.y - half,
-          });
-        },
-      });
-    });
+  const x = useSpring(mouseX, { damping, stiffness, mass: 0.5 });
+  const y = useSpring(mouseY, { damping, stiffness, mass: 0.5 });
 
-    return () => gsap.ticker.remove(() => {});
-  }, [trail, size]);
-
-  // === Event handlers ===
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    target.current = { x: e.clientX, y: e.clientY };
+    mouseX.set(e.clientX - size / 2);
+    mouseY.set(e.clientY - size / 2);
     setVisible(true);
-  }, []);
+  }, [mouseX, mouseY, size]);
 
   const handleMouseDown = useCallback(() => {
-    gsap.to(elRef.current, { scale: clickScale, duration: 0.1, ease: "power2.out" });
-  }, [clickScale]);
+    setIsClicking(true);
+  }, []);
 
   const handleMouseUp = useCallback(() => {
-    const targetScale = elRef.current?.classList.contains("cursor-hover") ? expandScale : 1;
-    gsap.to(elRef.current, { scale: targetScale, duration: 0.2, ease: "back.out(1.7)" });
-  }, [expandScale]);
+    setIsClicking(false);
+  }, []);
 
   const handleInteractiveEnter = useCallback(() => {
-    elRef.current?.classList.add("cursor-hover");
-    gsap.to(elRef.current, { scale: expandScale, duration: 0.3, ease: "back.out(1.7)" });
-  }, [expandScale]);
+    setIsHovering(true);
+  }, []);
 
   const handleInteractiveLeave = useCallback(() => {
-    elRef.current?.classList.remove("cursor-hover");
-    gsap.to(elRef.current, { scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+    setIsHovering(false);
   }, []);
 
   useEffect(() => {
@@ -98,9 +78,10 @@ export function InteractiveCursor({
 
   if (isTouch) return null;
 
+  const scale = isClicking ? clickScale : isHovering ? expandScale : 1;
+
   return (
-    <div
-      ref={elRef}
+    <motion.div
       aria-hidden
       style={{
         position: "fixed",
@@ -117,6 +98,16 @@ export function InteractiveCursor({
         boxSizing: "border-box",
         mixBlendMode: "difference",
         transformOrigin: "center center",
+        x,
+        y,
+      }}
+      animate={{ scale }}
+      transition={{
+        scale: {
+          type: "spring",
+          stiffness: isClicking ? 800 : 300,
+          damping: isClicking ? 20 : 15,
+        },
       }}
     />
   );

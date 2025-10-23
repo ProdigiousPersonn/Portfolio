@@ -1,11 +1,7 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import ProjectCard from "../ProjectCard.tsx";
 import "../../styles/Components/HomePage/Projects.css";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useInView } from "framer-motion";
 
 const projectData = [
   {
@@ -115,62 +111,53 @@ const Projects: React.FC = () => {
   }, [numColumns]);
 
 
-  useGSAP(
-    (context) => {
-      const el = containerRef.current;
-      if (!el) return;
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
-      const q = context.selector!;
-
-      gsap.set(q(".projectCard"), { opacity: 0, y: 50, scale: 0.95 });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          end: "bottom 20%",
-          // markers: true,
-        },
-      });
-
-      tl.to(q(".projectCard"), {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.3,
-        ease: "back.out(1.7)",
-        stagger: 0.12,
-      });
-
-      ScrollTrigger.refresh();
-
-      return () => {
-        ScrollTrigger.getAll().forEach((st) => st.kill());
-      };
+  const container = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0,
+        staggerChildren: 0.12,
+      },
     },
-    { scope: containerRef }
-  );
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.3,
+        ease: [0.175, 0.885, 0.32, 1.275],
+      },
+    },
+  };
 
   return (
     <div className="projectsWrapper" ref={containerRef}>
-      <div className="projectsContainer">
+      <motion.div className="projectsContainer" variants={container} initial="hidden" animate={isInView ? "visible" : "hidden"}>
         {columns.map((columnProjects, colIndex) => (
           <div className="project-column" key={colIndex}>
             {columnProjects.map((project, projIndex) => (
-              <ProjectCard
-                key={projIndex}
-                title={project.title}
-                description={project.description}
-                videoSrc={project.videoSrc}
-                videoCDN={project.videoCDN}
-                createdDate={project.createdDate}
-                status={project.status}
-                languages={project.languages}
-              />
+              <motion.div key={projIndex} variants={item}>
+                <ProjectCard
+                  title={project.title}
+                  description={project.description}
+                  videoSrc={project.videoSrc}
+                  videoCDN={project.videoCDN}
+                  createdDate={project.createdDate}
+                  status={project.status}
+                  languages={project.languages}
+                />
+              </motion.div>
             ))}
           </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

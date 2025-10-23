@@ -2,44 +2,47 @@ import { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from "three";
-import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 
 function Title() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const titleRef = useRef<HTMLHeadingElement>(null);
-    const subTitleRef = useRef<HTMLHeadingElement>(null);
-    const modelRef = useRef<HTMLDivElement>(null);
-    const arrowsRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!containerRef.current || !titleRef.current || !subTitleRef.current || !modelRef.current || !arrowsRef.current) return;
-
-        const ctx = gsap.context(() => {
-            gsap.from(titleRef.current, { y: -80, duration: 0.4 });
-            gsap.from(subTitleRef.current, { y: -50, duration: 0.6 });
-            gsap.from(modelRef.current, { y: 60, opacity: 0, duration: 0.8 });
-            gsap.from(arrowsRef.current, { opacity: 0, duration: 2 });
-        }, containerRef);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
-        <div ref={containerRef}>
-            <h1 ref={titleRef} className="title">Aiden Tran.</h1>
+        <div>
+            <h1 className="title">
+                <motion.span
+                    style={{ display: 'inline-block', translateY: -80 }}
+                    animate={{ translateY: 0 }}
+                    transition={{ duration: 0.4 }}
+                >
+                    Aiden Tran.
+                </motion.span>
+            </h1>
             <h1 className="bgLogo">Aiden Tran</h1>
-            <h2 ref={subTitleRef} className="subTitle subHead">Programmer</h2>
-            <div ref={modelRef} className="model">
+            <h2 className="subTitle subHead">
+                <motion.span
+                    style={{ display: 'inline-block', translateY: -50 }}
+                    animate={{ translateY: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    Programmer
+                </motion.span>
+            </h2>
+            <motion.div
+                className="model"
+                style={{ translateY: 60 }}
+                initial={{ opacity: 0 }}
+                animate={{ translateY: 0, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+            >
                 <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
                     <ambientLight intensity={1} />
                     <Sunlight />
                     <Keyboard position={[0, -0.07, 0]} />
                 </Canvas>
-            </div>
-            <div ref={arrowsRef} className="scrollDownContainer">
+            </motion.div>
+            <motion.div className="scrollDownContainer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
                 <div className="arrow"></div>
                 <div className="arrow"></div>
-            </div>
+            </motion.div>
         </div>
     );
 }

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { gsap } from "gsap";
+import { motion } from "framer-motion";
 
 const Loader: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
     const handleLoading = () => {
       setTimeout(() => {
-        gsap.to(".loader", {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          onComplete: () => setIsVisible(false),
-        });
+        setShouldAnimate(true);
       }, 500);
     };
 
@@ -34,10 +30,17 @@ const Loader: React.FC = () => {
   }
 
   return (
-    <div className="loader" style={loaderStyle}>
+    <motion.div
+      className="loader"
+      style={loaderStyle}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: shouldAnimate ? 0 : 1 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      onAnimationComplete={() => shouldAnimate && setIsVisible(false)}
+    >
       <div style={spinnerStyle}></div>
       <h2 style={{ color: "white", marginTop: "1rem" }}>Initializing...</h2>
-    </div>
+    </motion.div>
   );
 };
 

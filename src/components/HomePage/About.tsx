@@ -44,30 +44,30 @@ const About: React.FC = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.24, ease: [0.215, 0.61, 0.355, 1] } },
     };
 
-    const icon = {
-        hidden: { scale: 0, rotate: -180 },
-        visible: { scale: 1, rotate: 0, transition: { duration: 0.18, ease: [0.175, 0.885, 0.32, 1.275] } },
-    };
+    // const icon = {
+    //     hidden: { scale: 0, rotate: -180 },
+    //     visible: { scale: 1, rotate: 0, transition: { duration: 0.18, ease: [0.175, 0.885, 0.32, 1.275] } },
+    // };
 
-    const heading = {
-        hidden: { opacity: 0, x: -30 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } },
-    };
+    // const heading = {
+    //     hidden: { opacity: 0, x: -30 },
+    //     visible: { opacity: 1, x: 0, transition: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } },
+    // };
 
-    const divider = {
-        hidden: { scaleX: 0 },
-        visible: { scaleX: 1, transition: { duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] } },
-    };
+    // const divider = {
+    //     hidden: { scaleX: 0 },
+    //     visible: { scaleX: 1, transition: { duration: 0.12, ease: [0.25, 0.46, 0.45, 0.94] } },
+    // };
 
-    const text = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } },
-    };
+    // const text = {
+    //     hidden: { opacity: 0, y: 20 },
+    //     visible: { opacity: 1, y: 0, transition: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } },
+    // };
 
-    const image = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 0.18, ease: [0.175, 0.885, 0.32, 1.275] } },
-    };
+    // const image = {
+    //     hidden: { opacity: 0, scale: 0.8 },
+    //     visible: { opacity: 1, scale: 1, transition: { duration: 0.18, ease: [0.175, 0.885, 0.32, 1.275] } },
+    // };
 
     return (
         <div ref={containerRef}>

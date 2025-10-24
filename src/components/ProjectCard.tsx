@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import CaptionIcon from "./CaptionIcon.tsx";
 import "../styles/Components/ProjectCard.css";
 
@@ -26,14 +26,39 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     ? videoCDN || videoSrc || ""
     : videoSrc || videoCDN || "";
 
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Create intersection observer for lazy playback
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!video.src) video.src = video.dataset.src || "";
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.3 } // play when ~30% visible
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="projectCard bevelContainer">
       {finalVideoSrc ? (
         <div className="projectCardVideoWrapper">
           <video
-            preload="none"
-            src={finalVideoSrc}
-            autoPlay
+            ref={videoRef}
+            data-src={finalVideoSrc}
+            preload="metadata"
             loop
             muted
             playsInline

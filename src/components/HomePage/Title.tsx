@@ -1,8 +1,30 @@
 import { useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from "three";
 import { motion } from 'framer-motion';
+
+function ResponsiveCamera() {
+    const { camera, size } = useThree();
+
+    useEffect(() => {
+        if (camera instanceof THREE.PerspectiveCamera) {
+            // Adjust FOV based on viewport width to prevent clipping
+            // Wider FOV on smaller screens makes model appear at consistent size
+            const baseWidth = 1920;
+            const widthRatio = size.width / baseWidth;
+
+            // Calculate FOV adjustment - smaller screens need wider FOV
+            const baseFov = 40;
+            const fovAdjustment = Math.max(1, 1 / widthRatio);
+            camera.fov = baseFov * fovAdjustment;
+
+            camera.updateProjectionMatrix();
+        }
+    }, [camera, size]);
+
+    return null;
+}
 
 function Title() {
     return (
@@ -34,6 +56,7 @@ function Title() {
                 transition={{ duration: 0.8 }}
             >
                 <Canvas shadows camera={{ position: [0, 1, 3], fov: 40, zoom: 9 }}>
+                    <ResponsiveCamera />
                     <ambientLight intensity={1} />
                     <Sunlight />
                     <Keyboard position={[0, -0.07, 0]} />

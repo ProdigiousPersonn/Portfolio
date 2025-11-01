@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../styles/BlogItem.css'
+import '@styles/BlogItem.css'
 
 interface BlogItemButtonProps {
     index: number;

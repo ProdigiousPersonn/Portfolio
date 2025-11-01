@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import '../styles/Navbar.css';
+import '@styles/Navbar.css';
 // import { gsap } from "gsap";
 
 const Navbar = () => {

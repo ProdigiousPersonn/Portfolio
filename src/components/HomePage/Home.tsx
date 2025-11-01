@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import "../../styles/Components/HomePage/Home.css";
+import "@styles/Components/HomePage/Home.css";
 
-import About from "./About.tsx";
-import Title from "./Title.tsx";
-import Projects from "./Projects.tsx";
-import Divider from "../Divider.tsx";
-import SectionLines from "../SectionLines.tsx"
+import About from "@components/HomePage/About.tsx";
+import Title from "@components/HomePage/Title.tsx";
+import Projects from "@components/HomePage/Projects.tsx";
+import Divider from "@components/Divider.tsx";
+import SectionLines from "@components/SectionLines.tsx"
 
 class Home extends Component<unknown> {
     render() {

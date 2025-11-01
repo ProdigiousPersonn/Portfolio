@@ -12,15 +12,15 @@
 
 *::selection {
   background: var(--fgColor-accent);
-  color: #ffffff;
+  color: var(--bgColor-default);
 }
 *::-moz-selection {
   background: var(--fgColor-accent);
-  color: #ffffff;
+  color: var(--bgColor-default);
 }
 *::-webkit-selection {
   background: var(--fgColor-accent);
-  color: #ffffff;
+  color: var(--bgColor-default);
 }
 
 html {
@@ -108,7 +108,7 @@ a {
 
 .bevelContainer {
  position: relative;
- background: #222;
+ background: var(--bgColor-muted);
  clip-path: polygon(
    20px 0, calc(100% - 20px) 0,
    100% 20px, 100% calc(100% - 20px),
@@ -119,13 +119,13 @@ a {
  border-right: 2px solid;
  border-bottom: 2px solid;
  border-left: 2px solid;
- border-image: linear-gradient(0deg, transparent 0%, #383838 15%, #383838 85%, transparent 100%) 1;
+ border-image: linear-gradient(0deg, transparent 0%, var(--borderColor-default) 15%, var(--borderColor-default) 85%, transparent 100%) 1;
 }
 
 .sectionDivider {
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--borderColor-muted);
   z-index: 10;
 }
 

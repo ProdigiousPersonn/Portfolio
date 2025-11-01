@@ -1,0 +1,489 @@
+.projectsPageWrapper {
+  width: 100%;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: var(--font);
+}
+
+.projectsPageHeader {
+  margin-bottom: 3rem;
+}
+
+.projectsPageTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: var(--headlineFont);
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--fgColor-default);
+}
+
+/* ========== Filter Section ========== */
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+/* ========== Enhanced Search Bar ========== */
+.searchBarContainer {
+  width: 100%;
+}
+
+.searchBarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--bgColor-muted);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.searchBarWrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.searchBarWrapper:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.searchIcon {
+  color: var(--fgColor-muted);
+  flex-shrink: 0;
+}
+
+.searchBar {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--fgColor-default);
+  font-size: 1rem;
+  font-family: var(--font);
+  outline: none;
+}
+
+.searchBar::placeholder {
+  color: var(--fgColor-muted);
+  opacity: 0.7;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: var(--fgColor-muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.clearButton:hover {
+  background: var(--bgColor-default);
+  color: var(--fgColor-default);
+}
+
+/* ========== Tag Dropdown ========== */
+.tagDropdownContainer {
+  position: relative;
+  width: 100%;
+}
+
+.tagDropdownButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--bgColor-muted);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font);
+  color: var(--fgColor-default);
+  font-size: 1rem;
+}
+
+.tagDropdownButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tagIcon {
+  color: var(--fgColor-muted);
+  flex-shrink: 0;
+}
+
+.tagDropdownButton span {
+  flex: 1;
+  text-align: left;
+  font-family: var(--font);
+}
+
+.dropdownArrow {
+  color: var(--fgColor-muted);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dropdownArrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Content */
+.tagDropdownContent {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  background: var(--bgColor-muted);
+  z-index: 100;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  animation: dropdownOpen 0.2s ease;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95);
+    transform-origin: top;
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.tagSearchWrapper {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--borderColor-default);
+}
+
+.tagSearchInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: var(--bgColor-default);
+  border: 1px solid var(--borderColor-default);
+  border-radius: 4px;
+  color: var(--fgColor-default);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.tagSearchInput:focus {
+  border-color: var(--fgColor-accent);
+}
+
+.tagSearchInput::placeholder {
+  color: var(--fgColor-muted);
+  opacity: 0.7;
+}
+
+.tagDropdownScroll {
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+.tagSectionLabel {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--fgColor-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font);
+}
+
+.tagList {
+  display: flex;
+  flex-direction: column;
+}
+
+.tagCheckboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  font-family: var(--font);
+}
+
+.tagCheckboxLabel:hover {
+  background: var(--bgColor-default);
+}
+
+.tagCheckbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--fgColor-accent);
+}
+
+.tagCheckboxText {
+  color: var(--fgColor-default);
+  font-size: 0.95rem;
+  font-family: var(--font);
+}
+
+.tagDivider {
+  height: 1px;
+  background: var(--borderColor-default);
+  margin: 0.5rem 0;
+}
+
+.noTagsFound {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--fgColor-muted);
+  font-size: 0.9rem;
+  font-family: var(--font);
+}
+
+/* ========== Selected Tags Chips ========== */
+.selectedTagsChips {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tagChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--bgColor-muted);
+  border: 1px solid var(--borderColor-default);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-family: var(--font);
+  color: var(--fgColor-default);
+  transition: all 0.2s ease;
+}
+
+.tagChip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--fgColor-accent);
+}
+
+.tagChipRemove {
+  background: none;
+  border: none;
+  color: var(--fgColor-muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+}
+
+.tagChipRemove:hover {
+  background: var(--bgColor-default);
+  color: var(--fgColor-accent);
+}
+
+/* ========== Projects Container ========== */
+.projectsContainer {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ========== Pagination ========== */
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 3rem 0;
+  font-family: var(--font);
+}
+
+.paginationButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-family: var(--headlineFont);
+  border: none;
+  background: var(--bgColor-muted);
+  color: var(--fgColor-default);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.paginationButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.paginationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.paginationInfo {
+  font-size: 1rem;
+  color: var(--fgColor-default);
+  font-weight: 500;
+  font-family: var(--font);
+}
+
+/* ========== No Results ========== */
+.noResults {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.noResults h2 {
+  font-size: 2rem;
+  font-family: var(--headlineFont);
+  color: var(--fgColor-default);
+  margin-bottom: 1rem;
+}
+
+.noResults p {
+  font-size: 1.1rem;
+  color: var(--fgColor-muted);
+  font-family: var(--font);
+}
+
+/* ========== Scrollbar Styling ========== */
+.tagDropdownScroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tagDropdownScroll::-webkit-scrollbar-track {
+  background: var(--bgColor-default);
+}
+
+.tagDropdownScroll::-webkit-scrollbar-thumb {
+  background: var(--borderColor-default);
+  border-radius: 4px;
+}
+
+.tagDropdownScroll::-webkit-scrollbar-thumb:hover {
+  background: var(--fgColor-muted);
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+  .projectsContainer {
+    flex-direction: column;
+  }
+
+  .projectsPageTitle {
+    font-size: 2.5rem;
+  }
+
+  .paginationContainer {
+    gap: 1rem;
+  }
+
+  .filterSection {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsPageWrapper {
+    padding: 1rem;
+  }
+
+  .projectsPageTitle {
+    font-size: 2rem;
+  }
+
+  .searchBarWrapper,
+  .tagDropdownButton {
+    padding: 0.8rem 1rem;
+  }
+
+  .searchBar,
+  .tagDropdownButton span {
+    font-size: 0.9rem;
+  }
+
+  .paginationButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .tagChip {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .selectedTagsChips {
+    gap: 0.5rem;
+  }
+
+  .tagDropdownContent {
+    max-height: 300px;
+  }
+
+  .tagDropdownScroll {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsPageTitle {
+    font-size: 1.75rem;
+  }
+
+  .filterSection {
+    gap: 0.75rem;
+  }
+
+  .paginationContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .paginationInfo {
+    order: -1;
+  }
+}

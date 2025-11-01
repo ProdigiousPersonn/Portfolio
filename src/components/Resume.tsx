@@ -1,5 +1,5 @@
-import GoogleDocEmbed from "./GoogleDocEmbed";
-import CvButton from "./CvButton";
+import GoogleDocEmbed from "@components/GoogleDocEmbed";
+import CvButton from "@components/CvButton";
 
 function BlogList() {
   return (

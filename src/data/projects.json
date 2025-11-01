@@ -1,0 +1,157 @@
+[
+    {
+        "title": "ChromaClash",
+        "description": "A competitive 1v1 fighting game with dynamic gameplay mechanics and low-latency multiplayer support through rollback networking.",
+        "videoSrc": "/videos/ChromaClash.mp4",
+        "videoCDN": "https://assets.aidentran.dev/ChromaClash.mp4",
+        "createdDate": 2024,
+        "status": "Main Developer",
+        "teamSize": 2,
+        "projectType": "Game Development",
+        "tags": [
+            "Realtime Networking",
+            "Object Oriented Programming",
+            "Determinism"
+        ],
+        "languages": [
+            { "text": "Roblox", "imagePath": "/images/icons/robloxStudio.svg"
+            },
+            { "text": "Rojo", "imagePath": "/images/icons/rojo.png"
+            },
+            { "text": "Lua", "imagePath": "/images/icons/lua.svg"
+            },
+            { "text": "React-Lua", "imagePath": "/images/icons/react.svg"
+            }
+        ]
+    },
+    {
+        "title": "Forums",
+        "description": "A full-stack forum website built from scratch where users can create topics, post threads, and engage in discussions with a clean, responsive UI.",
+        "videoSrc": "",
+        "videoCDN": "",
+        "createdDate": 2025,
+        "status": "Developer",
+        "teamSize": 2,
+        "projectType": "Web Development",
+        "tags": [
+            "Networking",
+            "Functional Programming"
+        ],
+        "languages": [
+            { "text": "React", "imagePath": "/images/icons/react.svg"
+            },
+            { "text": "TypeScript", "imagePath": "/images/icons/typescript.svg"
+            },
+            { "text": "HTML", "imagePath": "/images/icons/html.svg"
+            },
+            { "text": "TailwindCSS", "imagePath": "/images/icons/tailwindcss.svg"
+            },
+            { "text": "PostgresSQL", "imagePath": "/images/icons/postgresql.svg"
+            }
+        ]
+    },
+    {
+        "title": "PWNAGE",
+        "description": "A fast-paced first person shooter with extreme movement capabilities and an arsenal of unique weapons.",
+        "videoSrc": "/videos/Pwnage.mp4",
+        "videoCDN": "https://assets.aidentran.dev/Pwnage.mp4",
+        "createdDate": 2023,
+        "status": "Main Developer",
+        "teamSize": 1,
+        "projectType": "Game Development",
+        "tags": [
+            "Realtime Networking",
+            "Object Oriented Programming"
+        ],
+        "languages": [
+            { "text": "Roblox", "imagePath": "/images/icons/robloxStudio.svg"
+            },
+            { "text": "Lua", "imagePath": "/images/icons/lua.svg"
+            }
+        ]
+    },
+    {
+        "title": "Portfolio",
+        "description": "Modern responsive portfolio website showcasing projects and writeups with interactive elements and smooth animations.",
+        "videoSrc": "",
+        "videoCDN": "",
+        "createdDate": 2025,
+        "status": "Main Developer",
+        "teamSize": 1,
+        "projectType": "Web Development",
+        "tags": [
+            "Functional Programming"
+        ],
+        "languages": [
+            { "text": "React", "imagePath": "/images/icons/react.svg"
+            },
+            { "text": "ThreeJS", "imagePath": "/images/icons/threejs.svg"
+            },
+            { "text": "TypeScript", "imagePath": "/images/icons/typescript.svg"
+            },
+            { "text": "HTML", "imagePath": "/images/icons/html.svg"
+            },
+            { "text": "CSS", "imagePath": "/images/icons/css.svg"
+            }
+        ]
+    },
+    {
+        "title": "Spectrum Analyzer",
+        "description": "",
+        "videoSrc": "/videos/SpectrumAnalyzer.mp4",
+        "videoCDN": "",
+        "createdDate": 2025,
+        "status": "Main Developer",
+        "teamSize": 1,
+        "projectType": "Simulation",
+        "tags": [
+            "Functional Programming"
+        ],
+        "languages": [
+            { "text": "C++", "imagePath": "/images/icons/c++.svg"
+            },
+            { "text": "ImGui", "imagePath": "/images/icons/imgui.png"
+            }
+        ]
+    },
+    {
+        "title": "Those Who Chop",
+        "description": "Rougelike FPS for those who want to feel overpowered. Made in 3 days for the Roblox Developer Challenge hackathon.",
+        "videoSrc": "/videos/ThoseWhoChop.mp4",
+        "videoCDN": "",
+        "createdDate": 2025,
+        "status": "Developer",
+        "teamSize": 1,
+        "projectType": "Game Development",
+        "tags": [
+            "Object Oriented Programming"
+        ],
+        "languages": [
+            { "text": "Roblox", "imagePath": "/images/icons/robloxStudio.svg"
+            },
+            { "text": "Lua", "imagePath": "/images/icons/lua.svg"
+            }
+        ]
+    },
+    {
+        "title": "Black Hole Analyzer",
+        "description": "A simulation that visualizes gravitational time dilation, spacetime curvature, and redshift near black holes.",
+        "videoSrc": "/videos/BlackHoleAnalyzer.mp4",
+        "videoCDN": "",
+        "createdDate": 2025,
+        "status": "Developer",
+        "teamSize": 1,
+        "projectType": "Simulation",
+        "tags": [
+            "Functional Programming"
+        ],
+        "languages": [
+            { "text": "Python", "imagePath": "/images/icons/python.svg"
+            },
+            { "text": "Matplotlib", "imagePath": "/images/icons/matplotlib.svg"
+            },
+            { "text": "Pandas", "imagePath": "/images/icons/pandas.svg"
+            }
+        ]
+    }
+]

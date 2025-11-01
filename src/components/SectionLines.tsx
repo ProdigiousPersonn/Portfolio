@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Components/SectionLines.css";
+import "@styles/Components/SectionLines.css";
 
 interface DoubleLinesProps {
   lineWidth?: string;

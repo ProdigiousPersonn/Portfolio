@@ -5,8 +5,8 @@ import {
 } from 'react-icons/fa';
 import { SiLua, SiRobloxstudio, SiElectron, SiCplusplus, SiNextdotjs, SiUnity } from "react-icons/si";
 import { motion, useInView } from 'framer-motion';
-import CvButton from "../CvButton.tsx"
-import '../../styles/Components/HomePage/About.css';
+import CvButton from "@components/CvButton.tsx"
+import '@styles/Components/HomePage/About.css';
 
 interface BoxProps {
     children: React.ReactNode;

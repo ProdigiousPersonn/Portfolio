@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import '../styles/Markdown.css';
-import '../styles/Code.css';
+import '@styles/Markdown.css';
+import '@styles/Code.css';
 
 interface DisplayProps {
     fileName: string;

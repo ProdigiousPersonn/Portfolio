@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import CaptionIcon from "./CaptionIcon.tsx";
-import "../styles/Components/ProjectCard.css";
+import CaptionIcon from "@components/CaptionIcon.tsx";
+import "@styles/Components/ProjectCard.css";
+import { VideoComponent } from "@components/Video.tsx"
 
 interface ProjectCardProps {
   title: string;
@@ -32,7 +33,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const video = videoRef.current;
     if (!video) return;
 
-    // Create intersection observer for lazy playback
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           }
         });
       },
-      { threshold: 0.3 } // play when ~30% visible
+      { threshold: 0.3 }
     );
 
     observer.observe(video);
@@ -55,7 +55,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <div className="projectCard bevelContainer">
       {finalVideoSrc ? (
         <div className="projectCardVideoWrapper">
-          <video
+          <VideoComponent
             ref={videoRef}
             data-src={finalVideoSrc}
             preload="metadata"

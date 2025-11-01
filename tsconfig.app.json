@@ -21,7 +21,16 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    
+
+    /* Path Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@data/*": ["./src/data/*"]
+    }
   },
   "include": ["src"]
 }

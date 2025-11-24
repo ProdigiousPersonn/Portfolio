@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { memo, useMemo } from 'react';
 
 interface CaptionIconProps {
   text: string;
@@ -9,46 +9,45 @@ interface CaptionIconProps {
   iconScale?: number;
 }
 
-class CaptionIcon extends Component<CaptionIconProps> {
-    render() {
-        const { 
-            text = "Language", 
-            imagePath = "", 
-            layout = 'column',
-            gap = 7,
-            fontSize = '1rem',
-            iconScale = 1.5
-        } = this.props;
+const CaptionIcon = memo<CaptionIconProps>(({
+  text = "Language",
+  imagePath = "",
+  layout = 'column',
+  gap = 7,
+  fontSize = '1rem',
+  iconScale = 1.5
+}) => {
+  const isRow = layout === 'row';
 
-        const isRow = layout === 'row';
+  const containerStyle = useMemo(() => ({
+    display: 'flex',
+    flexDirection: isRow ? 'row' as const : 'column' as const,
+    alignItems: 'center' as const,
+    textAlign: isRow ? 'left' as const : 'center' as const,
+    gap: gap,
+    fontSize: fontSize,
+    paddingRight: isRow ? gap : 0
+  }), [isRow, gap, fontSize]);
 
-        const containerStyle = {
-            display: 'flex',
-            flexDirection: isRow ? 'row' as const : 'column' as const,
-            alignItems: 'center' as const,
-            textAlign: isRow ? 'left' as const : 'center' as const,
-            gap: gap,
-            fontSize: fontSize,
-            paddingRight: isRow ? gap : 0
-        };
+  const imgStyle = useMemo(() => ({
+    width: `${iconScale}em`,
+    height: `${iconScale}em`,
+    display: 'inline-block',
+  }), [iconScale]);
 
-        const imgStyle = {
-            width: `${iconScale}em`,
-            height: `${iconScale}em`,
-            display: 'inline-block',
-        };
+  return (
+    <div style={containerStyle}>
+      <img
+        src={imagePath}
+        style={imgStyle}
+        alt={text}
+        loading="lazy"
+      />
+      <span>{text}</span>
+    </div>
+  );
+});
 
-        return (
-            <div style={containerStyle}>
-                <img 
-                    src={imagePath} 
-                    style={imgStyle} 
-                    alt={text} 
-                />
-                <span>{text}</span>
-            </div>
-        );
-    }
-}
+CaptionIcon.displayName = 'CaptionIcon';
 
 export default CaptionIcon;

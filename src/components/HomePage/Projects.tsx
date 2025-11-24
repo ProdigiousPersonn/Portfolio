@@ -46,7 +46,7 @@ const Projects: React.FC = () => {
 
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
-  const container = {
+  const container = useMemo(() => ({
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
@@ -55,9 +55,9 @@ const Projects: React.FC = () => {
         staggerChildren: 0.12,
       },
     },
-  };
+  }), []);
 
-  const item = {
+  const item = useMemo(() => ({
     hidden: { opacity: 0, y: 50, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -68,15 +68,15 @@ const Projects: React.FC = () => {
         ease: [0.175, 0.885, 0.32, 1.275],
       },
     },
-  };
+  }), []);
 
   return (
     <div className="projectsWrapper" ref={containerRef}>
       <motion.div className="projectsContainer" variants={container} initial="hidden" animate={isInView ? "visible" : "hidden"}>
         {columns.map((columnProjects, colIndex) => (
           <div className="project-column" key={colIndex}>
-            {columnProjects.map((project, projIndex) => (
-              <motion.div key={projIndex} variants={item}>
+            {columnProjects.map((project) => (
+              <motion.div key={project.title} variants={item}>
                 <ProjectCard
                   title={project.title}
                   description={project.description}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo, memo } from "react";
 import CaptionIcon from "@components/CaptionIcon.tsx";
 import "@styles/Components/ProjectCard.css";
 import { VideoComponent } from "@components/Video.tsx"
@@ -13,7 +13,35 @@ interface ProjectCardProps {
   languages: { text: string; imagePath?: string }[];
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
+// Shared IntersectionObserver instance for all video elements
+let videoObserver: IntersectionObserver | null = null;
+
+const getVideoObserver = () => {
+  if (!videoObserver) {
+    videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            if (!video.src && video.dataset.videoSrc) {
+              video.src = video.dataset.videoSrc;
+            }
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '50px' // Start loading slightly before entering viewport
+      }
+    );
+  }
+  return videoObserver;
+};
+
+const ProjectCard: React.FC<ProjectCardProps> = memo(({
   title,
   videoSrc,
   videoCDN,
@@ -22,34 +50,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   createdDate,
   description,
 }) => {
-  const isProduction = window.location.hostname !== "localhost";
-  const finalVideoSrc = isProduction
-    ? videoCDN || videoSrc || ""
-    : videoSrc || videoCDN || "";
+  const finalVideoSrc = useMemo(() => {
+    const isProduction = window.location.hostname !== "localhost";
+    return isProduction
+      ? videoCDN || videoSrc || ""
+      : videoSrc || videoCDN || "";
+  }, [videoSrc, videoCDN]);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !finalVideoSrc) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!video.src) video.src = video.dataset.src || "";
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
+    video.dataset.videoSrc = finalVideoSrc;
+    const observer = getVideoObserver();
     observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
+
+    return () => {
+      observer.unobserve(video);
+    };
+  }, [finalVideoSrc]);
 
   return (
     <div className="projectCard bevelContainer">
@@ -57,7 +78,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="projectCardVideoWrapper">
           <VideoComponent
             ref={videoRef}
-            data-src={finalVideoSrc}
             preload="metadata"
             loop
             muted
@@ -78,9 +98,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="projectCardSectionDivider" />
       <h2 className="projectCardSectionTitle">Languages/Frameworks</h2>
       <ul className="projectCardList">
-        {languages.map((lang, index) => (
+        {languages.map((lang) => (
           <CaptionIcon
-            key={index}
+            key={lang.text}
             text={lang.text}
             imagePath={lang.imagePath ?? ""}
             layout="row"
@@ -89,6 +109,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </ul>
     </div>
   );
-};
+});
+
+ProjectCard.displayName = 'ProjectCard';
 
 export default ProjectCard;

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import ProjectCard from "@components/ProjectCard.tsx";
 import "@styles/Pages/ProjectsPage.css";
 import { motion, useInView } from "framer-motion";
@@ -11,8 +11,10 @@ const ProjectsPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const techDropdownRef = useRef<HTMLDivElement>(null);
+  const searchDebounceRef = useRef<NodeJS.Timeout>();
   const [numColumns, setNumColumns] = useState(2);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +56,22 @@ const ProjectsPage: React.FC = () => {
       tech.toLowerCase().includes(techSearchQuery.toLowerCase())
     );
   }, [allTechnologies, techSearchQuery]);
+
+  // Debounce search input for better performance
+  useEffect(() => {
+    if (searchDebounceRef.current) {
+      clearTimeout(searchDebounceRef.current);
+    }
+    searchDebounceRef.current = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 300);
+
+    return () => {
+      if (searchDebounceRef.current) {
+        clearTimeout(searchDebounceRef.current);
+      }
+    };
+  }, [searchQuery]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -106,12 +124,12 @@ const ProjectsPage: React.FC = () => {
   // Filter projects based on search, tags, and technologies (AND logic)
   const filteredProjects = useMemo(() => {
     return projectData.filter((project) => {
-      // Search filter
+      // Search filter with debounced query
       const matchesSearch =
-        searchQuery === "" ||
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.projectType?.toLowerCase().includes(searchQuery.toLowerCase());
+        debouncedSearchQuery === "" ||
+        project.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+        project.description.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
+        project.projectType?.toLowerCase().includes(debouncedSearchQuery.toLowerCase());
 
       // Tag filter - AND logic: project must have ALL selected tags
       const matchesTags =
@@ -126,7 +144,7 @@ const ProjectsPage: React.FC = () => {
 
       return matchesSearch && matchesTags && matchesTechnologies;
     });
-  }, [searchQuery, selectedTags, selectedTechnologies]);
+  }, [debouncedSearchQuery, selectedTags, selectedTechnologies]);
 
   // Pagination
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
@@ -153,11 +171,11 @@ const ProjectsPage: React.FC = () => {
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedTags, selectedTechnologies]);
+  }, [debouncedSearchQuery, selectedTags, selectedTechnologies]);
 
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
-  const container = {
+  const container = useMemo(() => ({
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
@@ -166,9 +184,9 @@ const ProjectsPage: React.FC = () => {
         staggerChildren: 0.12,
       },
     },
-  };
+  }), []);
 
-  const item = {
+  const item = useMemo(() => ({
     hidden: { opacity: 0, y: 50, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -179,23 +197,23 @@ const ProjectsPage: React.FC = () => {
         ease: [0.175, 0.885, 0.32, 1.275],
       },
     },
-  };
+  }), []);
 
-  const toggleTag = (tag: string) => {
+  const toggleTag = useCallback((tag: string) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
     );
-  };
+  }, []);
 
-  const toggleTechnology = (tech: string) => {
+  const toggleTechnology = useCallback((tech: string) => {
     setSelectedTechnologies((prev) =>
       prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
     );
-  };
+  }, []);
 
-  const clearSearch = () => {
+  const clearSearch = useCallback(() => {
     setSearchQuery("");
-  };
+  }, []);
 
   return (
     <div className="projectsPageWrapper" ref={containerRef}>
@@ -413,8 +431,8 @@ const ProjectsPage: React.FC = () => {
           >
             {columns.map((columnProjects, colIndex) => (
               <div className="project-column" key={colIndex}>
-                {columnProjects.map((project, projIndex) => (
-                  <motion.div key={projIndex} variants={item}>
+                {columnProjects.map((project) => (
+                  <motion.div key={project.title} variants={item}>
                     <ProjectCard
                       title={project.title}
                       description={project.description}

@@ -16,24 +16,6 @@
     white-space: nowrap;
 }
 
-.bgLogo {
-    position: absolute;
-    left: 50%;
-    line-height: 70vh;
-    top: calc(50vh - 70vh);
-    user-select: none;
-    z-index: -10;
-    background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--bgColor-neutral-muted)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    font-size: calc(800 / 1920 * 100vw);
-    transform: translate(-50%,-50%);
-}
 
 .subHead {
     color: var(--fgColor-accent);

@@ -1,58 +1,172 @@
-
-
-.Navbar {
-    list-style-type: none;
-    margin: 0;
-    padding-left: 40px;
-    padding-top: 10px;
-    overflow: hidden;
-    position:fixed;
-    z-index: 10000;
-}
-
-.navbarBackground {
-    height: 90px;
-    width: 100vw;
+.navbar {
     position: fixed;
     top: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.2);
+    left: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    z-index: 9999;
 }
 
-.NavbarButton {
-    position: relative;
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
+.navButton {
+    display: flex;
+    align-items: stretch;
+    height: 45px;
     text-decoration: none;
-	cursor: pointer;
-	outline: inherit;
-
-    display:inline-block;
-    /* padding-top: 36px; */
-    padding-right: 20px;
-    padding-left: 20px;
+    color: #999;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
 }
 
-/* .Links {border: none;} */
-
-.Logo {
-    /* margin: .67em 0; */
-    font-weight: var(--base-text-weight-zx, 600);
-    /* padding-bottom: .3em; */
-    font-size: 2em;
-    /* border-bottom: 1px solid var(--borderColor-muted); */
+.navButton:hover {
+    color: #fff;
 }
 
-.NavbarButton:hover {
-    color:var(--fgColor-accent);
+/* Back triangle (left side) - Right triangle with long side on bottom */
+.navButtonBack {
+    width: 20px;
+    height: 45px;
+    position: relative;
 }
 
-.NavbarButton:nth-child(2) {
-    padding-left: 40px;
+.navButtonBack::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 45px solid rgba(40, 40, 40, 0.8);
+    border-left: 20px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.triangleBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.triangleBorder polyline {
+    transition: stroke 0.3s ease;
+}
+
+/* Content rectangle (middle) */
+.navButtonContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    background: rgba(40, 40, 40, 0.8);
+    border-top: 1px solid rgba(80, 80, 80, 0.5);
+    border-bottom: 1px solid rgba(80, 80, 80, 0.5);
+    white-space: nowrap;
+    transition: background 0.3s ease, border-top-color 0.3s ease, border-bottom-color 0.3s ease, border-left-color 0.3s ease;
+}
+
+.navButtonText {
+    display: inline-block;
+    transition: letter-spacing 0.3s ease;
+}
+
+/* Front triangle (right side) - Right triangle with long side on top */
+.navButtonFront {
+    width: 20px;
+    height: 45px;
+    position: relative;
+}
+
+.navButtonFront::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 45px solid rgba(40, 40, 40, 0.8);
+    border-right: 20px solid transparent;
+    transition: border-top-color 0.3s ease;
+}
+
+/* Logo button specific styles */
+.navButtonLogo .navButtonContent {
+    padding: 0 1rem;
+    border-left: 1px solid rgba(80, 80, 80, 0.5);
+}
+
+.navLogoIcon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+/* Hover effects - Consistent across all elements */
+.navButton:hover .navButtonBack::before {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.navButton:hover .navButtonBack .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navButton:hover .navButtonContent {
+    background: rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.navButton:hover .navButtonText {
+    letter-spacing: 0.15em;
+}
+
+.navButton:hover .navButtonFront::before {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.navButton:hover .navButtonFront .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+/* Logo button hover - add left border color change */
+.navButtonLogo:hover .navButtonContent {
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Active state - Consistent across all elements */
+.navButton:active .navButtonBack::before {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.navButton:active .navButtonBack .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.4);
+}
+
+.navButton:active .navButtonContent {
+    background: rgba(255, 255, 255, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.4);
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+.navButton:active .navButtonFront::before {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.navButton:active .navButtonFront .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.4);
+}
+
+.navButtonLogo:active .navButtonContent {
+    border-left-color: rgba(255, 255, 255, 0.4);
 }

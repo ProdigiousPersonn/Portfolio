@@ -5,12 +5,12 @@ import '@styles/App.css'
 import '@styles/Markdown.css'
 
 import App from '@/App.tsx'
-// import Loading from "@components/LoadingScreen"
+import Loading from "@components/LoadingScreen"
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {/* <Loading/> */}
+    <Loading/>
     <App />
   </StrictMode>,
 )

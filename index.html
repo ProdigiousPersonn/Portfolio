@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color: #0d1117;">
 
 <head>
   <meta charset="UTF-8" />
@@ -9,17 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/styles/App.css">
   <title>Aiden Tran</title>
 </head>
 
-<body id="body" style="display:none;">
+<body id="body" style="display:none; background-color: #0d1117;">
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <script type="text/javascript">
     window.onload = function () {
       setTimeout(function () {
-        document.getElementById("body").style.display = "";
+        const body = document.getElementById("body");
+        body.style.display = "";
+        body.style.backgroundColor = "";
+        document.documentElement.style.backgroundColor = "";
       }, 200);
     }
   </script>

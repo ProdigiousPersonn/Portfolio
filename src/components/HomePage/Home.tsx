@@ -12,7 +12,7 @@ class Home extends Component<unknown> {
         return (
             <>
                 <Title/>
-                <Divider text = "About" duration = { 15 }/>
+                {/* <Divider text = "About" duration = { 15 }/> */}
                 <header style={{padding: "4rem"}}>
                     <h1 className="sectionTitle">About</h1>
                     <SectionLines lineWidth="150px" lineHeight={2} gap={10} spacing={500} />

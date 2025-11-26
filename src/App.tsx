@@ -18,7 +18,6 @@ function App() {
       <Cursor/>
       <BrowserRouter>
         <Navbar />
-        <div style={{ paddingTop: '50px' }}></div>
         <ScrollTop/>
         <Routes>
           <Route index element={<Home/>} />
@@ -28,6 +27,7 @@ function App() {
           <Route path="/blog" element={<BlogList/>} />
           <Route path="/blog/:postId" element={<BlogDisplayWrapper />}/>
           <Route path="/resume" element={<Resume/>} />
+          <Route path="/art" element={<div style={{ padding: '4rem', textAlign: 'center' }}><h1>Art Gallery - Coming Soon</h1></div>} />
         </Routes>
         <Divider text = "Aiden Tran" duration = { 15 }/>
         <Footer/>

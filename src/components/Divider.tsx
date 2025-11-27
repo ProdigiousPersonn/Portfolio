@@ -20,7 +20,7 @@ class Divider extends Component<DividerProps> {
   }
 
   render() {
-    const { text, duration = 10, className = "", textSize = "16px" } = this.props;
+    const { text, duration = 10, className = "", textSize = "24px" } = this.props;
 
     return (
       <div className={`dividerContainer ${className}`}>

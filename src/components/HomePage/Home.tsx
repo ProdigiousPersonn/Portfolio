@@ -12,21 +12,28 @@ class Home extends Component<unknown> {
         return (
             <>
                 <Title/>
-                {/* <Divider text = "About" duration = { 15 }/> */}
-                <header style={{padding: "4rem"}}>
-                    <h1 className="sectionTitle">About</h1>
-                    <SectionLines lineWidth="150px" lineHeight={2} gap={10} spacing={500} />
-                </header>
-                <header style={{paddingBottom: "4rem"}}>
-                    <About/>
-                </header>
-                
-                <Divider text = "Projects" duration = { 15 }/>
-                <header style={{padding: "4rem"}}>
-                    <h1 className="sectionTitle">Projects</h1>
-                    <SectionLines lineWidth="150px" lineHeight={2} gap={10} spacing={650} />
-                </header>
-                <Projects/>
+                <div style={{
+                    height: 'clamp(0px, 1000px, 100vh)',
+                    position: 'relative',
+                    zIndex: 1
+                }}></div>
+                <div style={{position: 'relative', zIndex: 1, background: 'var(--bgColor-default)'}}>
+                    <Divider text = "About" duration = { 15 }/>
+                    <header style={{padding: "4rem"}}>
+                        <h1 className="sectionTitle">About</h1>
+                        <SectionLines lineWidth="150px" lineHeight={2} gap={10} spacing={500} />
+                    </header>
+                    <header style={{paddingBottom: "4rem"}}>
+                        <About/>
+                    </header>
+
+                    <Divider text = "Projects" duration = { 15 }/>
+                    <header style={{padding: "4rem"}}>
+                        <h1 className="sectionTitle">Projects</h1>
+                        <SectionLines lineWidth="150px" lineHeight={2} gap={10} spacing={650} />
+                    </header>
+                    <Projects/>
+                </div>
             </>
         );
     }

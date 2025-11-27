@@ -8,7 +8,7 @@
 .dividerLine {
     vertical-align: middle;
     width: 100vw;
-    height: 3px;
+    height: 2px;
     background: var(--borderColor-default);
 }
 

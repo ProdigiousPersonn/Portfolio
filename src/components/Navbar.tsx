@@ -17,7 +17,7 @@ const NavButton = ({ to, children, isLogo = false }: NavButtonProps) => {
                             points="20,0 0,45 20,45"
                             fill="none"
                             stroke="rgba(80, 80, 80, 0.5)"
-                            strokeWidth=""
+                            strokeWidth="4"
                             vectorEffect="non-scaling-stroke"
                         />
                     </svg>
@@ -32,7 +32,7 @@ const NavButton = ({ to, children, isLogo = false }: NavButtonProps) => {
                         points="0,0 20,0 0,45"
                         fill="none"
                         stroke="rgba(80, 80, 80, 0.5)"
-                        strokeWidth="1"
+                        strokeWidth="4"
                         vectorEffect="non-scaling-stroke"
                     />
                 </svg>

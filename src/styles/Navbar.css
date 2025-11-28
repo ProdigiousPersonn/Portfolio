@@ -6,11 +6,24 @@
     height: 90px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 2rem;
     z-index: 10000;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+.navbarLeft,
+.navbarRight {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.navbarRight {
+    position:absolute;
+    right:90px;
 }
 
 .navButton {
@@ -31,7 +44,6 @@
     color: #fff;
 }
 
-/* Back triangle (left side) - Right triangle with long side on bottom */
 .navButtonBack {
     width: 20px;
     height: 45px;
@@ -63,7 +75,6 @@
     transition: stroke 0.3s ease;
 }
 
-/* Content rectangle (middle) */
 .navButtonContent {
     display: flex;
     align-items: center;
@@ -81,7 +92,6 @@
     transition: letter-spacing 0.3s ease;
 }
 
-/* Front triangle (right side) - Right triangle with long side on top */
 .navButtonFront {
     width: 20px;
     height: 45px;
@@ -100,7 +110,6 @@
     transition: border-top-color 0.3s ease;
 }
 
-/* Logo button specific styles */
 .navButtonLogo .navButtonContent {
     padding: 0 1rem;
     border-left: 1px solid rgba(80, 80, 80, 0.5);
@@ -112,7 +121,6 @@
     display: block;
 }
 
-/* Hover effects - Consistent across all elements */
 .navButton:hover .navButtonBack::before {
     border-bottom-color: rgba(255, 255, 255, 0.15);
 }
@@ -139,12 +147,10 @@
     stroke: rgba(255, 255, 255, 0.3);
 }
 
-/* Logo button hover - add left border color change */
 .navButtonLogo:hover .navButtonContent {
     border-left-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Active state - Consistent across all elements */
 .navButton:active .navButtonBack::before {
     border-bottom-color: rgba(255, 255, 255, 0.2);
 }
@@ -169,4 +175,98 @@
 
 .navButtonLogo:active .navButtonContent {
     border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+.navButtonFrontFlipped {
+    width: 20px;
+    height: 45px;
+    position: relative;
+}
+
+.navButtonFrontFlipped::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 45px solid rgba(40, 40, 40, 0.8);
+    border-left: 20px solid transparent;
+    transition: border-top-color 0.3s ease;
+}
+
+.navButtonBackFlipped {
+    width: 20px;
+    height: 45px;
+    position: relative;
+}
+
+.navButtonBackFlipped::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 45px solid rgba(40, 40, 40, 0.8);
+    border-right: 20px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.navButton:hover .navButtonFrontFlipped::before {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+.navButton:hover .navButtonFrontFlipped .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navButton:hover .navButtonBackFlipped::before {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.navButton:hover .navButtonBackFlipped .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navButtonFlipped:hover .navButtonContent {
+    border-right-color: rgba(255, 255, 255, 0.3);
+}
+
+.navButton:active .navButtonFrontFlipped::before {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.navButton:active .navButtonFrontFlipped .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.4);
+}
+
+.navButton:active .navButtonBackFlipped::before {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.navButton:active .navButtonBackFlipped .triangleBorder polyline {
+    stroke: rgba(255, 255, 255, 0.4);
+}
+
+.navButtonFlipped:active .navButtonContent {
+    border-right-color: rgba(255, 255, 255, 0.4);
+}
+
+.navSocialIcon {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.navButtonRightEnd .navButtonContent {
+    border-right: 1px solid rgba(80, 80, 80, 0.5);
+}
+
+.navButtonRightEnd:hover .navButtonContent {
+    border-right-color: rgba(255, 255, 255, 0.3);
+}
+
+.navButtonRightEnd:active .navButtonContent {
+    border-right-color: rgba(255, 255, 255, 0.4);
 }

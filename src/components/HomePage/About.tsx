@@ -250,7 +250,7 @@ const About: React.FC = () => {
                 >
                     <div className="aboutIntro">
                         <p className="aboutMainText">
-                            I'm an <span className="highlight">18 year old developer</span> with <span className="highlight">6-7 years </span>
+                            I'm an <span className="highlight">18 year old developer</span> with <span className="highlight">5+ years </span>
                             of experience
                         </p>
                         <p className="aboutSubText">

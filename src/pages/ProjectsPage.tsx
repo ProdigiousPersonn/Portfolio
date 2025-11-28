@@ -23,7 +23,6 @@ const ProjectsPage: React.FC = () => {
   const [tagSearchQuery, setTagSearchQuery] = useState("");
   const [techSearchQuery, setTechSearchQuery] = useState("");
 
-  // Extract all unique tags from projects
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     projectData.forEach(project => {
@@ -32,7 +31,6 @@ const ProjectsPage: React.FC = () => {
     return Array.from(tags).sort();
   }, []);
 
-  // Extract all unique technologies from projects
   const allTechnologies = useMemo(() => {
     const technologies = new Set<string>();
     projectData.forEach(project => {
@@ -41,7 +39,6 @@ const ProjectsPage: React.FC = () => {
     return Array.from(technologies).sort();
   }, []);
 
-  // Filter tags based on search in dropdown
   const filteredTagsForDropdown = useMemo(() => {
     if (!tagSearchQuery) return allTags;
     return allTags.filter(tag =>
@@ -49,7 +46,6 @@ const ProjectsPage: React.FC = () => {
     );
   }, [allTags, tagSearchQuery]);
 
-  // Filter technologies based on search in dropdown
   const filteredTechnologiesForDropdown = useMemo(() => {
     if (!techSearchQuery) return allTechnologies;
     return allTechnologies.filter(tech =>
@@ -57,7 +53,6 @@ const ProjectsPage: React.FC = () => {
     );
   }, [allTechnologies, techSearchQuery]);
 
-  // Debounce search input for better performance
   useEffect(() => {
     if (searchDebounceRef.current) {
       clearTimeout(searchDebounceRef.current);
@@ -88,7 +83,6 @@ const ProjectsPage: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -121,7 +115,6 @@ const ProjectsPage: React.FC = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isDropdownOpen, isTechDropdownOpen]);
 
-  // Filter projects based on search, tags, and technologies (AND logic)
   const filteredProjects = useMemo(() => {
     return projectData.filter((project) => {
       // Search filter with debounced query
@@ -146,7 +139,6 @@ const ProjectsPage: React.FC = () => {
     });
   }, [debouncedSearchQuery, selectedTags, selectedTechnologies]);
 
-  // Pagination
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
   const paginatedProjects = useMemo(() => {
     const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
@@ -154,7 +146,6 @@ const ProjectsPage: React.FC = () => {
     return filteredProjects.slice(startIndex, endIndex);
   }, [filteredProjects, currentPage]);
 
-  // Organize into columns
   const columns = useMemo(() => {
     const newColumns: typeof projectData[] = Array.from(
       { length: numColumns },
@@ -168,7 +159,6 @@ const ProjectsPage: React.FC = () => {
     return newColumns;
   }, [paginatedProjects, numColumns]);
 
-  // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [debouncedSearchQuery, selectedTags, selectedTechnologies]);
@@ -220,9 +210,7 @@ const ProjectsPage: React.FC = () => {
       <header className="projectsPageHeader">
         <h1 className="projectsPageTitle">Projects</h1>
 
-        {/* Filter Section Container */}
         <div className="filterSection">
-          {/* Enhanced Search Bar */}
           <div className="searchBarContainer">
             <div className="searchBarWrapper bevelContainer">
               <svg className="searchIcon" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -243,7 +231,6 @@ const ProjectsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Tag Dropdown */}
           <div className="tagDropdownContainer" ref={dropdownRef}>
             <button
               className="tagDropdownButton bevelContainer"
@@ -262,10 +249,8 @@ const ProjectsPage: React.FC = () => {
               </svg>
             </button>
 
-            {/* Dropdown Content */}
             {isDropdownOpen && (
               <div className="tagDropdownContent bevelContainer">
-                {/* Search Tags Input */}
                 <div className="tagSearchWrapper">
                   <input
                     type="text"
@@ -277,7 +262,6 @@ const ProjectsPage: React.FC = () => {
                 </div>
 
                 <div className="tagDropdownScroll">
-                  {/* Popular Tags Section */}
                   {!tagSearchQuery && (
                     <>
                       <div className="tagSectionLabel">POPULAR</div>
@@ -298,7 +282,6 @@ const ProjectsPage: React.FC = () => {
                     </>
                   )}
 
-                  {/* All Tags Section */}
                   <div className="tagSectionLabel">
                     ALL TAGS ({filteredTagsForDropdown.length})
                   </div>
@@ -324,7 +307,6 @@ const ProjectsPage: React.FC = () => {
             )}
           </div>
 
-          {/* Technology Dropdown */}
           <div className="tagDropdownContainer" ref={techDropdownRef}>
             <button
               className="tagDropdownButton bevelContainer"
@@ -343,10 +325,8 @@ const ProjectsPage: React.FC = () => {
               </svg>
             </button>
 
-            {/* Dropdown Content */}
             {isTechDropdownOpen && (
               <div className="tagDropdownContent bevelContainer">
-                {/* Search Technologies Input */}
                 <div className="tagSearchWrapper">
                   <input
                     type="text"
@@ -358,7 +338,6 @@ const ProjectsPage: React.FC = () => {
                 </div>
 
                 <div className="tagDropdownScroll">
-                  {/* All Technologies Section */}
                   <div className="tagSectionLabel">
                     ALL TECHNOLOGIES ({filteredTechnologiesForDropdown.length})
                   </div>
@@ -385,7 +364,6 @@ const ProjectsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Selected Tags Display as Chips */}
         {selectedTags.length > 0 && (
           <div className="selectedTagsChips">
             {selectedTags.map((tag) => (
@@ -402,7 +380,6 @@ const ProjectsPage: React.FC = () => {
           </div>
         )}
 
-        {/* Selected Technologies Display as Chips */}
         {selectedTechnologies.length > 0 && (
           <div className="selectedTagsChips">
             {selectedTechnologies.map((tech) => (
@@ -420,7 +397,6 @@ const ProjectsPage: React.FC = () => {
         )}
       </header>
 
-      {/* Projects Grid */}
       {filteredProjects.length > 0 ? (
         <>
           <motion.div
@@ -448,7 +424,6 @@ const ProjectsPage: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="paginationContainer">
               <button

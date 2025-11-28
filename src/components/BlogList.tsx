@@ -27,7 +27,6 @@ function BlogList() {
             .then((data) => setData(data));
     }, []);
 
-    // Extract all unique tags from blogs
     const allTags = useMemo(() => {
         const tags = new Set<string>();
         data.forEach(blog => {
@@ -36,7 +35,6 @@ function BlogList() {
         return Array.from(tags).sort();
     }, [data]);
 
-    // Filter tags based on search in dropdown
     const filteredTagsForDropdown = useMemo(() => {
         if (!tagSearchQuery) return allTags;
         return allTags.filter(tag =>
@@ -44,7 +42,6 @@ function BlogList() {
         );
     }, [allTags, tagSearchQuery]);
 
-    // Click outside to close dropdown
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -61,7 +58,6 @@ function BlogList() {
         };
     }, [isDropdownOpen]);
 
-    // Keyboard support for dropdown
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Escape" && isDropdownOpen) {
@@ -73,16 +69,13 @@ function BlogList() {
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, [isDropdownOpen]);
 
-    // Filter blogs based on search and tags (AND logic for tags)
     const filteredBlogs = useMemo(() => {
         return data.filter((blog) => {
-            // Search filter
             const matchesSearch =
                 searchQuery === "" ||
                 blog.Name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 blog.Description.toLowerCase().includes(searchQuery.toLowerCase());
 
-            // Tag filter - AND logic: blog must have ALL selected tags
             const matchesTags =
                 selectedTags.length === 0 ||
                 selectedTags.every((tag) => blog.Tags?.includes(tag));
@@ -91,7 +84,6 @@ function BlogList() {
         });
     }, [data, searchQuery, selectedTags]);
 
-    // Pagination
     const totalPages = Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE);
     const paginatedBlogs = useMemo(() => {
         const startIndex = (currentPage - 1) * BLOGS_PER_PAGE;
@@ -99,7 +91,6 @@ function BlogList() {
         return filteredBlogs.slice(startIndex, endIndex);
     }, [filteredBlogs, currentPage]);
 
-    // Reset to page 1 when filters change
     useEffect(() => {
         setCurrentPage(1);
     }, [searchQuery, selectedTags]);
@@ -119,9 +110,7 @@ function BlogList() {
             <header className="blogListHeader">
                 <h1 className="blogListTitle">Writeups</h1>
 
-                {/* Filter Section Container */}
                 <div className="filterSection">
-                    {/* Enhanced Search Bar */}
                     <div className="searchBarContainer">
                         <div className="searchBarWrapper bevelContainer">
                             <svg className="searchIcon" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -142,7 +131,6 @@ function BlogList() {
                         </div>
                     </div>
 
-                    {/* Tag Dropdown */}
                     <div className="tagDropdownContainer" ref={dropdownRef}>
                         <button
                             className="tagDropdownButton bevelContainer"
@@ -161,10 +149,8 @@ function BlogList() {
                             </svg>
                         </button>
 
-                        {/* Dropdown Content */}
                         {isDropdownOpen && (
                             <div className="tagDropdownContent bevelContainer">
-                                {/* Search Tags Input */}
                                 <div className="tagSearchWrapper">
                                     <input
                                         type="text"
@@ -176,7 +162,6 @@ function BlogList() {
                                 </div>
 
                                 <div className="tagDropdownScroll">
-                                    {/* All Tags Section */}
                                     <div className="tagSectionLabel">
                                         ALL TAGS ({filteredTagsForDropdown.length})
                                     </div>
@@ -203,7 +188,6 @@ function BlogList() {
                     </div>
                 </div>
 
-                {/* Selected Tags Display as Chips */}
                 {selectedTags.length > 0 && (
                     <div className="selectedTagsChips">
                         {selectedTags.map((tag) => (
@@ -221,7 +205,6 @@ function BlogList() {
                 )}
             </header>
 
-            {/* Blog List */}
             {filteredBlogs.length > 0 ? (
                 <>
                     <ul className="blogList">
@@ -237,7 +220,6 @@ function BlogList() {
                         ))}
                     </ul>
 
-                    {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="paginationContainer">
                             <button

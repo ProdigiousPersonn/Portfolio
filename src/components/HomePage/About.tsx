@@ -51,11 +51,9 @@ const GLTFCamera: React.FC<{ cameras: THREE.Camera[] }> = ({ cameras }) => {
         if (cameras && cameras.length > 0) {
             const gltfCamera = cameras[0];
 
-            // Update the camera's aspect ratio to match the canvas
             if (gltfCamera instanceof THREE.PerspectiveCamera) {
-                // Only set the FOV multiplier once on initial load
                 if (initialFov === null) {
-                    const newFov = gltfCamera.fov * 1.1; // Increase field of view by 30%
+                    const newFov = gltfCamera.fov * 1.1;
                     setInitialFov(newFov);
                     gltfCamera.fov = newFov;
                 } else {
@@ -92,13 +90,11 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
     const screenEmissiveIntensity = 1;
     const screenRotationOffset = 1.05;
 
-    // Find both the top lid and screen objects, and apply materials
     useEffect(() => {
         if (scene) {
             scene.traverse((child) => {
                 const nameLower = child.name.toLowerCase();
 
-                // Find lid and screen
                 if (nameLower.includes('lid') || (nameLower.includes('top') && !nameLower.includes('screen'))) {
                     topLidRef.current = child;
                 }
@@ -106,33 +102,25 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
                     screenRef.current = child;
                 }
 
-                // Apply enhanced materials to all meshes
                 if (child instanceof THREE.Mesh) {
                     if (child.material) {
-                        // Clone the material to avoid affecting other instances
                         const material = Array.isArray(child.material)
                             ? child.material.map(mat => mat.clone())
                             : child.material.clone();
 
-                        // Check if this is the screen mesh
                         const isScreen = nameLower.includes('screen') || nameLower.includes('display');
 
-                        // Apply material enhancements
                         const applyEnhancements = (mat: THREE.Material) => {
                             if (mat instanceof THREE.MeshStandardMaterial || mat instanceof THREE.MeshPhysicalMaterial) {
                                 if (isScreen) {
-                                    // Make screen emissive for bloom effect
                                     mat.emissive = screenColor;
                                     mat.emissiveIntensity = screenEmissiveIntensity;
-                                    mat.toneMapped = false; // Disable tone mapping for bloom
+                                    mat.toneMapped = false;
                                 } else {
-                                    // Enhance metalness and roughness for better lighting response
                                     mat.metalness = Math.max(mat.metalness, 0.3);
                                     mat.roughness = Math.min(mat.roughness, 0.7);
-                                    // Enable environment mapping
                                     mat.envMapIntensity = 1.5;
                                 }
-                                // Better shadow response
                                 mat.needsUpdate = true;
                             }
                         };
@@ -146,7 +134,6 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
                         child.material = material;
                     }
 
-                    // Enable shadows
                     child.castShadow = true;
                     child.receiveShadow = true;
                 }
@@ -154,14 +141,11 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
         }
     }, [scene]);
 
-    // Update target rotation based on isOpen prop
     useEffect(() => {
         setTargetRotation(isOpen ? Math.PI*0.12 : Math.PI*0.67);
     }, [isOpen]);
 
-    // Smooth animation using useFrame
     useFrame(() => {
-        // Update three-mesh-ui
         ThreeMeshUI.update();
 
         if (topLidRef.current) {
@@ -171,20 +155,17 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
         }
 
         if (screenRef.current) {
-            // Rotate screen
             const targetScreenRotation = targetRotation + screenRotationOffset;
             const currentRotation = screenRef.current.rotation.x;
             const diff = targetScreenRotation - currentRotation;
             screenRef.current.rotation.x += diff * 0.05;
 
-            // Update UI to follow screen
             if (screenUIRef.current && isOpen) {
                 const screenWorldPos = new THREE.Vector3();
                 const screenWorldQuat = new THREE.Quaternion();
                 screenRef.current.getWorldPosition(screenWorldPos);
                 screenRef.current.getWorldQuaternion(screenWorldQuat);
 
-                // Apply TOP face rotation (-90° X)
                 const faceQuat = new THREE.Quaternion();
                 const euler = new THREE.Euler(-Math.PI / 2, 0, 0);
                 faceQuat.setFromEuler(euler);
@@ -194,13 +175,11 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
                 screenUIRef.current.position.copy(screenWorldPos);
                 screenUIRef.current.quaternion.copy(finalQuat);
 
-                // Apply offset
                 const offset = new THREE.Vector3(0, 0.01, 0);
                 offset.applyQuaternion(screenWorldQuat);
                 screenUIRef.current.position.add(offset);
             }
 
-            // Update screen light
             if (screenLightRef.current && isOpen) {
                 const screenWorldPos = new THREE.Vector3();
                 screenRef.current.getWorldPosition(screenWorldPos);
@@ -217,10 +196,8 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
 
     return (
         <group>
-            {/* Use the camera from the GLTF file */}
             {cameras && cameras.length > 0 && <GLTFCamera cameras={cameras} />}
 
-            {/* Complementary point light that matches screen color */}
             <pointLight
                 ref={screenLightRef}
                 color={screenColor}
@@ -243,10 +220,9 @@ const LaptopModel: React.FC<LaptopModelProps> = ({ scale, position, rotation, is
 const About: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const laptopRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(containerRef, { once: false, amount: 0.2 }); // For fade-in animations
-    const isLaptopInView = useInView(laptopRef, { once: false, amount: 0.5 }); // For laptop animation - 50% visible
+    const isInView = useInView(containerRef, { once: false, amount: 0.2 });
+    const isLaptopInView = useInView(laptopRef, { once: false, amount: 0.5 });
 
-    // 3D model configuration
     const scale = 1;
     const position: [number, number, number] = [0, 0, 0];
     const rotation: [number, number, number] = [0, 0, 0];
@@ -314,7 +290,6 @@ const About: React.FC = () => {
                             <div className="skillGrid">
                                 <div className="skillItem"><FaGit /> Git</div>
                                 <div className="skillItem"><FaDocker /> Docker</div>
-                                {/* <div className="skillItem"><SiVscode /> VS Code</div> */}
                                 <div className="skillItem"><SiFigma /> Figma</div>
                             </div>
                         </CollapsibleSection>
@@ -330,12 +305,10 @@ const About: React.FC = () => {
                 >
                     <Canvas shadows gl={{ antialias: true, alpha: true }}>
                         <Suspense fallback={null}>
-                            {/* Ambient light for overall scene illumination */}
                             <ambientLight intensity={0.3} />
 
                             <LaptopModel scale={scale} position={position} rotation={rotation} isOpen={isLaptopInView} />
 
-                            {/* Environment for reflections and ambient lighting */}
                             <Environment preset="warehouse" />
                         </Suspense>
                     </Canvas>

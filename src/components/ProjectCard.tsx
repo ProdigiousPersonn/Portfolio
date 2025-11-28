@@ -34,7 +34,7 @@ const getVideoObserver = () => {
       },
       {
         threshold: 0.3,
-        rootMargin: '50px' // Start loading slightly before entering viewport
+        rootMargin: '50px'
       }
     );
   }

@@ -20,7 +20,6 @@ export default function Footer() {
                         <a href="mailto:aiden@aidentran.dev">
                             aiden@aidentran.dev
                         </a>
-                        {/* <p>+phone num</p> */}
                     </div>
 
                     <div className="socials">
@@ -36,7 +35,6 @@ export default function Footer() {
                 <p>2025 Aiden Tran.</p>
             </div>
 
-            {/* Background watermark */}
             <h1 className="footer-bg">AT</h1>
         </footer>
     );

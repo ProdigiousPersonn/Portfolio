@@ -39,7 +39,6 @@ function App() {
 function BlogDisplayWrapper() {
   const { postId } = useParams();
 
-  console.log(postId);
   const fileName = `${postId}`;
 
   return <BlogDisplay fileName={fileName} />;

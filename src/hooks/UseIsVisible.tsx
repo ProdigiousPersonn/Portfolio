@@ -37,7 +37,7 @@ export const useIsVisible = (
       if (targetRef.current) {
         observer.unobserve(targetRef.current);
       }
-      observer.disconnect(); // Clean up the IntersectionObserver
+      observer.disconnect();
     };
   }, [once]);
 

@@ -92,7 +92,6 @@ const Projects: React.FC = () => {
         ))}
       </motion.div>
 
-      {/* See More Button */}
       <div className="seeMoreContainer">
         <Link to="/projects" className="seeMoreButton bevelContainer">
           See All Projects
